@@ -29,7 +29,7 @@ namespace Game.Controllers
                 return Vector3.zero;
             }
 
-            return new Vector3((float)Math.Round(position.x), (float)Math.Round(position.y), position.z);
+            return new Vector3((float)Math.Round(position.x), position.y, Mathf.Round(position.z));
         }
 
         private void InjectDataFromSciptableObject()
