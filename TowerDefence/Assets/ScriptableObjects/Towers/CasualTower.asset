@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 1
   _name: CasualTower
-  _damage: 10
-  _shotsPerSecond: 1
+  _damage: 50
+  _timeBetweenShots: 1
   _range: 3
   _towerImage: {fileID: 0}
   _prefab: {fileID: 6411440775733857069, guid: 99908542b6944b74e800699f10b74435, type: 3}
+  _projectilePrefab: {fileID: 8136283291608896268, guid: 5d53f2952e628a145ab48cf8ef31667e,
+    type: 3}

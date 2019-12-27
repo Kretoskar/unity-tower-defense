@@ -1,0 +1,74 @@
+﻿using Game.Gameplay.Mobs;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Game.Gameplay
+{
+    public class Projectile : MonoBehaviour
+    {
+        private GameObject _target;
+
+        private Vector3 _lastPosition;
+
+        private Mob _targetMob;
+        private bool _shouldShoot = true;
+        private int _damage = 10;
+
+        public GameObject Target { get => _target; set => _target = value; }
+        public int Damage { get => _damage; set => _damage = value; }
+
+        private void Start()
+        {
+            _targetMob = _target.GetComponent<Mob>();
+            _targetMob.Death += StopShooting;
+        }
+
+        private void StopShooting()
+        {
+            _shouldShoot = false;
+            _lastPosition = _target.transform.position;
+
+        }
+
+        private void Update()
+        {
+            MoveToTarget();
+        }
+
+        private void MoveToTarget()
+        {
+            if (_shouldShoot)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, Time.deltaTime * 10);
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, _lastPosition, Time.deltaTime * 10);
+            }
+            if(transform.position == _lastPosition)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            print("col");
+            if (other.gameObject.tag == "Enemy")
+            {
+                Mob mob = other.gameObject.GetComponent<Mob>();
+                if(mob != null)
+                {
+                    mob.Health -= _damage;
+                }
+            }
+        }
+
+        private void OnDestroy()
+        {
+            _targetMob.Death -= StopShooting;
+        }
+    }
+}

@@ -18,7 +18,7 @@ public class TowerSO : ScriptableObject
 
     [SerializeField]
     [Range(0.1f, 10)]
-    private float _shotsPerSecond = 1;
+    private float _timeBetweenShots = 1;
 
     [SerializeField]
     [Range(1, 100)]
@@ -30,11 +30,15 @@ public class TowerSO : ScriptableObject
     [SerializeField]
     private GameObject _prefab = null;
 
+    [SerializeField]
+    private GameObject _projectilePrefab = null;
+
     public GameObject Prefab { get => _prefab; set => _prefab = value; }
     public Image TowerImage { get => _towerImage; set => _towerImage = value; }
-    public float ShotsPerSecond { get => _shotsPerSecond; set => _shotsPerSecond = value; }
+    public float ShotsPerSecond { get => _timeBetweenShots; set => _timeBetweenShots = value; }
     public float Damage { get => _damage; set => _damage = value; }
     public string Name { get => _name; set => _name = value; }
     public int Id { get => _id; set => _id = value; }
     public float Range { get => _range; set => _range = value; }
+    public GameObject ProjectilePrefab { get => _projectilePrefab; set => _projectilePrefab = value; }
 }

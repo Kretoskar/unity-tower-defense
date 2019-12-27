@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 3
   _name: SuperCoolTower
-  _damage: 10
-  _shotsPerSecond: 1
+  _damage: 1
+  _timeBetweenShots: 0.1
   _range: 3
   _towerImage: {fileID: 0}
   _prefab: {fileID: 5580984262670787243, guid: 38208acd92d058447bbae31c550b7015, type: 3}
+  _projectilePrefab: {fileID: 8136283291608896268, guid: 5d53f2952e628a145ab48cf8ef31667e,
+    type: 3}

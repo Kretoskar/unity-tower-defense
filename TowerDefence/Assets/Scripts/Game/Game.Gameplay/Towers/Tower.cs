@@ -21,6 +21,7 @@ namespace Game.Gameplay.Towers
         {
             _pathController = FindObjectOfType<PathController>();
             _lastWaypointPosition = _pathController.WayPoints[_pathController.WayPoints.Count - 1];
+            StartCoroutine(ShootCoroutine());
         }
 
         private void Update() { 
@@ -56,6 +57,22 @@ namespace Game.Gameplay.Towers
                     }
                 }
             }
+        }
+
+        private IEnumerator ShootCoroutine()
+        {
+            if (_currentMob != null)
+            {
+                GameObject projectileGO = Instantiate(_towerSO.ProjectilePrefab, transform.position, Quaternion.identity);
+                Projectile projectile = projectileGO.GetComponent<Projectile>();
+                if (projectile != null)
+                {
+                    projectile.Target = _currentMob.gameObject;
+                    projectile.Damage = (int)_towerSO.Damage;
+                }
+            }
+            yield return new WaitForSeconds(_towerSO.ShotsPerSecond);
+            StartCoroutine(ShootCoroutine());
         }
     }
 }

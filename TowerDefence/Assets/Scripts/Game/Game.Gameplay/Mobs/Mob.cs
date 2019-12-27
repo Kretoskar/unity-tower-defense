@@ -10,11 +10,34 @@ namespace Game.Gameplay.Mobs
     {
         protected float _waypointTolerance = .1f;
         private int _currentWaypointIndex;
+        private int _health;
+        private int _maxHealth;
         protected MobSO _mobSO;
         protected PathController _pathController = null;
 
-        public MobSO MobSO { get => _mobSO; set => _mobSO = value; }
         public Action Death;
+
+        public MobSO MobSO { get => _mobSO; set => _mobSO = value; }
+        public int Health {
+            get
+            {
+                return _health;
+            }
+            set
+            {
+                _health = value;
+                if(_health <= 0)
+                {
+                    Die();
+                }
+            }
+        }
+
+        private void Die()
+        {
+            Death?.Invoke();
+            Destroy(gameObject);
+        }
 
         private void Start()
         {
@@ -28,6 +51,7 @@ namespace Game.Gameplay.Mobs
 
         protected virtual void Initialize()
         {
+            Health = (int)_mobSO.Health;
             _pathController = FindObjectOfType<PathController>();
             _currentWaypointIndex = 0;
             transform.position = _pathController.WayPoints[_currentWaypointIndex];
