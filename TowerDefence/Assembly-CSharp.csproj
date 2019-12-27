@@ -65,6 +65,8 @@
     <Compile Include="Assets\Scripts\Game\Game.Controllers\GridController.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Controllers\GridSO.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\PlayerInput.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Gameplay\TowerSO.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Gameplay\TowerSpawner.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/kogut/Desktop/Projekty/TowerDefence/TowerDefence/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

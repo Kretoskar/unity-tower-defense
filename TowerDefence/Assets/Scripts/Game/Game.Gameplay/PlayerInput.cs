@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Controllers;
+using System;
 
 namespace Game.Gameplay
 {
@@ -10,6 +11,8 @@ namespace Game.Gameplay
         private Camera _mainCamera;
         private GridController _gridController;
 
+        public Action<Vector3> PlayerClicked;
+
         private void Start()
         {
             _gridController = FindObjectOfType<GridController>();
@@ -17,6 +20,11 @@ namespace Game.Gameplay
         }
 
         void Update()
+        {
+            GetClickedCellPosition();
+        }
+
+        private void GetClickedCellPosition()
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -32,9 +40,7 @@ namespace Game.Gameplay
 
                 clickPosition.y = 0.5f;
                 clickPosition = _gridController.GetClosestGridPosition(clickPosition);
-
-                GameObject spawnedCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                spawnedCube.transform.position = clickPosition;
+                PlayerClicked?.Invoke(clickPosition);
             }
         }
     }
