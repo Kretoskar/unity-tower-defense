@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Game\Game.Controllers\GridController.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Controllers\GridSO.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Controllers\UIController.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\TowerSO.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\TowerSpawner.cs" />
