@@ -1,28 +1,67 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Controllers;
 
 namespace Game.Gameplay.Mobs
 {
     public class MobSpawner : MonoBehaviour
     {
         [SerializeField]
-        private MobSpawnerSO _mobSpawnerSO;
+        private MobSpawnerSO _mobSpawnerSO = null;
+
+        private PathController _pathController;
+
+        private bool _waveEnded = true;
 
         private void Start()
         {
-            Spawn();
+            _waveEnded = true;
+            _pathController = FindObjectOfType<PathController>();
         }
 
-        public void Spawn()
+        private void Update()
         {
-            foreach(var wave in _mobSpawnerSO.MobWaves)
+            if(_waveEnded)
             {
-                for(int i = 0; i < wave.NumberOfMobs; i++)
-                {
-                    int mobIndex = UnityEngine.Random.Range(0, wave.MobTypes.Count);
-                    Instantiate(wave.MobTypes[mobIndex].Prefab, new Vector3(0, i), Quaternion.identity);
-                }
+                _waveEnded = false;
+                SpawnWave();
+            }
+        }
+
+        public void SpawnWave()
+        {
+            int waveIndex = UnityEngine.Random.Range(0, _mobSpawnerSO.MobWaves.Count);
+            print(waveIndex);
+            StartCoroutine(StartSpawningCoroutine(waveIndex));
+        }
+
+        private IEnumerator StartSpawningCoroutine(int waveIndex)
+        {
+            
+            yield return new WaitForSeconds(_mobSpawnerSO.TimeBetweenWaveSpawns);
+           StartCoroutine( SpawnCoroutine(_mobSpawnerSO.MobWaves[waveIndex], _mobSpawnerSO.MobWaves[waveIndex].NumberOfMobs));
+        }
+
+        private IEnumerator SpawnCoroutine(MobWaveSO currentWave, int mobCount, int currentMob = 0)
+        {
+            _waveEnded = false;
+            int mobIndex = UnityEngine.Random.Range(0, currentWave.MobTypes.Count);
+            GameObject mobGO = Instantiate(currentWave.MobTypes[mobIndex].Prefab, Vector3.zero, Quaternion.identity);
+            Mob mob = mobGO.GetComponent<Mob>();
+            if(mob != null)
+            {
+                mob.MobSO = currentWave.MobTypes[mobIndex];
+            }
+            yield return new WaitForSeconds(currentWave.TimeInSecondsBetweenSpawns);
+            currentMob++;
+            if (currentMob <= mobCount)
+            {
+                StartCoroutine(SpawnCoroutine(currentWave, mobCount, currentMob));
+            }
+            else
+            {
+                _waveEnded = true;
             }
         }
     }

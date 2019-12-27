@@ -14,7 +14,12 @@ namespace Game.Gameplay.Mobs
         [Range(1, 100)]
         private int _numberOfMobs = 10;
 
+        [SerializeField]
+        [Range(0.5f, 10)]
+        private float _timeInSecondsBetweenSpawns = 1;
+
         public List<MobSO> MobTypes { get => _mobTypes; set => _mobTypes = value; }
         public int NumberOfMobs { get => _numberOfMobs; set => _numberOfMobs = value; }
+        public float TimeInSecondsBetweenSpawns { get => _timeInSecondsBetweenSpawns; set => _timeInSecondsBetweenSpawns = value; }
     }
 }

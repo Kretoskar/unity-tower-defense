@@ -10,6 +10,11 @@ namespace Game.Gameplay.Mobs
         [SerializeField]
         private List<MobWaveSO> _mobWaves = null;
 
+        [SerializeField]
+        [Range(1, 10)]
+        private int _timeBetweenWaveSpawns = 3;
+
         public List<MobWaveSO> MobWaves { get => _mobWaves; set => _mobWaves = value; }
+        public int TimeBetweenWaveSpawns { get => _timeBetweenWaveSpawns; set => _timeBetweenWaveSpawns = value; }
     }
 }

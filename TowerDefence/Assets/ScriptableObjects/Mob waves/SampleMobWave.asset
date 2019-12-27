@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mobTypes:
   - {fileID: 11400000, guid: d12f5587cb4eadd4cbea36157dc74344, type: 2}
-  - {fileID: 11400000, guid: 8e24962e3008a7344919b3d4ea9eea2b, type: 2}
-  _numberOfMobs: 10
+  _numberOfMobs: 5
+  _timeInSecondsBetweenSpawns: 1

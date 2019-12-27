@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c58d8a250e32ce4bb57670bb3d3fcf9, type: 3}
-  m_Name: MobSpawner
+  m_Script: {fileID: 11500000, guid: 14e8b061e2fb9f34a9db28d959cae622, type: 3}
+  m_Name: SampleMobWave2
   m_EditorClassIdentifier: 
-  _mobWaves:
-  - {fileID: 11400000, guid: 6f7db2d25dea45b47b953d9916e2d402, type: 2}
-  - {fileID: 11400000, guid: 83d41248e847e704081c17b085a2b5d6, type: 2}
-  _timeBetweenWaveSpawns: 3
+  _mobTypes:
+  - {fileID: 11400000, guid: 8e24962e3008a7344919b3d4ea9eea2b, type: 2}
+  _numberOfMobs: 10
+  _timeInSecondsBetweenSpawns: 0.5

@@ -64,7 +64,9 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Game\Game.Controllers\GridController.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Controllers\GridSO.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Controllers\PathController.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Controllers\UIController.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Gameplay\Mobs\Mob.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Mobs\MobSO.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Mobs\MobSpawner.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Mobs\MobSpawnerSO.cs" />
