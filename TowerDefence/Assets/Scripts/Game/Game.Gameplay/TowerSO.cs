@@ -13,10 +13,16 @@ public class TowerSO : ScriptableObject
     private string _name = "Tower";
 
     [SerializeField]
+    [Range(1,100)]
     private float _damage = 10;
 
     [SerializeField]
+    [Range(0.1f, 10)]
     private float _shotsPerSecond = 1;
+
+    [SerializeField]
+    [Range(1, 100)]
+    private float _range = 3;
 
     [SerializeField]
     private Image _towerImage = null;
@@ -30,4 +36,5 @@ public class TowerSO : ScriptableObject
     public float Damage { get => _damage; set => _damage = value; }
     public string Name { get => _name; set => _name = value; }
     public int Id { get => _id; set => _id = value; }
+    public float Range { get => _range; set => _range = value; }
 }

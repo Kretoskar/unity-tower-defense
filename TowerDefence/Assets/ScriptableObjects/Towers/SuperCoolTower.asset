@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6891d90513e65534fb0af9940f16d6f3, type: 3}
-  m_Name: Tower2
+  m_Name: SuperCoolTower
   m_EditorClassIdentifier: 
-  _id: 2
-  _name: CoolTower
+  _id: 3
+  _name: SuperCoolTower
   _damage: 10
   _shotsPerSecond: 1
+  _range: 3
   _towerImage: {fileID: 0}
-  _prefab: {fileID: 2472561676039020486, guid: 02bebe5d76df9a242a6aa76d42c97f16, type: 3}
+  _prefab: {fileID: 5580984262670787243, guid: 38208acd92d058447bbae31c550b7015, type: 3}

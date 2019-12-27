@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Game.Gameplay.Towers;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +28,10 @@ namespace Game.Gameplay
             if (SelectedTower == -1)
                 return;
             int turretIndex = UnityEngine.Random.Range(0, _towers.Count);
-            Instantiate(_towers[SelectedTower].Prefab, position, Quaternion.identity);
+            GameObject towerGO = Instantiate(_towers[SelectedTower].Prefab, position, Quaternion.identity);
+            Tower tower = towerGO.GetComponent<Tower>();
+            if (tower != null)
+                tower.TowerSO = _towers[SelectedTower];
         }
     }
 }

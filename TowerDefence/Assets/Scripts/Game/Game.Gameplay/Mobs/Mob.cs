@@ -14,6 +14,7 @@ namespace Game.Gameplay.Mobs
         protected PathController _pathController = null;
 
         public MobSO MobSO { get => _mobSO; set => _mobSO = value; }
+        public Action Death;
 
         private void Start()
         {
@@ -49,6 +50,7 @@ namespace Game.Gameplay.Mobs
 
         private void ReachedEndOfPath()
         {
+            Death?.Invoke();
             Destroy(gameObject);
         }
 

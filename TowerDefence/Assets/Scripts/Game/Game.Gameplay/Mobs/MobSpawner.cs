@@ -32,7 +32,6 @@ namespace Game.Gameplay.Mobs
         public void SpawnWave()
         {
             int waveIndex = UnityEngine.Random.Range(0, _mobSpawnerSO.MobWaves.Count);
-            print(waveIndex);
             StartCoroutine(StartSpawningCoroutine(waveIndex));
         }
 
@@ -49,6 +48,7 @@ namespace Game.Gameplay.Mobs
             int mobIndex = UnityEngine.Random.Range(0, currentWave.MobTypes.Count);
             GameObject mobGO = Instantiate(currentWave.MobTypes[mobIndex].Prefab, Vector3.zero, Quaternion.identity);
             Mob mob = mobGO.GetComponent<Mob>();
+            mobGO.name = mobGO.name + currentMob;
             if(mob != null)
             {
                 mob.MobSO = currentWave.MobTypes[mobIndex];

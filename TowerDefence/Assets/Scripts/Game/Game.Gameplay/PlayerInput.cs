@@ -38,7 +38,7 @@ namespace Game.Gameplay
                     clickPosition = hit.point;
                 }
 
-                clickPosition.y = 0.5f;
+                clickPosition.y = 1f;
                 clickPosition = _gridController.GetClosestGridPosition(clickPosition);
                 PlayerClicked?.Invoke(clickPosition);
             }
