@@ -19,10 +19,15 @@ namespace Game.Gameplay.Mobs
         private float _health = 100;
 
         [SerializeField]
+        [Range(1,100)]
+        private int _damageDealtToPlayerOnPathExit = 10;
+
+        [SerializeField]
         private GameObject _prefab = null;
 
         public GameObject Prefab { get => _prefab; set => _prefab = value; }
         public float Health { get => _health; set => _health = value; }
         public float Speed { get => _speed; set => _speed = value; }
+        public int DamageDealtToPlayerOnPathExit { get => _damageDealtToPlayerOnPathExit; set => _damageDealtToPlayerOnPathExit = value; }
     }
 }

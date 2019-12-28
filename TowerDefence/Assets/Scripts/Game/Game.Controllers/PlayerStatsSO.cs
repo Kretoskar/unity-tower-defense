@@ -23,10 +23,6 @@ namespace Game.Controllers
         [SerializeField]
         private int _maxHunger = 100;
 
-        private int _currGold;
-        private int _currHealth;
-        private int _currHunger;
-
         public string Name { get => _name; set => _name = value; }
         public Image Avatar { get => _avatar; set => _avatar = value; }
         public int StartingGold { get => _startingGold; set => _startingGold = value; }

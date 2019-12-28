@@ -12,11 +12,25 @@ namespace Game.Controllers
     /// </summary>
     public class UIController : MonoBehaviour
     {
+        [SerializeField]
+        private Image _healthBar;
+
         private TowerSpawner _towerSpawner;
+        private PlayerStats _playerStats;
 
         private void Start()
         {
+            _playerStats = FindObjectOfType<PlayerStats>();
             _towerSpawner = FindObjectOfType<TowerSpawner>();
+            _playerStats.HealthChanged += UpdateHealthBar;
+        }
+
+        public void UpdateHealthBar(int currHealth)
+        {
+            int maxHealth = _playerStats.MaxHealth;
+            float fillAmount = ((float)currHealth / (float)maxHealth);
+            print(fillAmount);
+            _healthBar.fillAmount = fillAmount;
         }
 
         /// <summary>

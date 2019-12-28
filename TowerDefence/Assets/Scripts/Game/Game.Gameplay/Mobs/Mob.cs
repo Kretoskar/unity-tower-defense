@@ -79,6 +79,7 @@ namespace Game.Gameplay.Mobs
         /// </summary>
         protected void ReachedEndOfPath()
         {
+            FindObjectOfType<PlayerStats>().Health -= _mobSO.DamageDealtToPlayerOnPathExit;
             Die();
         }
 
