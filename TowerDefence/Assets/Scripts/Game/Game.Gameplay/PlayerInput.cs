@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Controllers;
 using System;
+using UnityEngine.EventSystems;
 
 namespace Game.Gameplay
 {
@@ -34,6 +35,8 @@ namespace Game.Gameplay
         {
             if (Input.GetMouseButtonDown(0))
             {
+                if (EventSystem.current.IsPointerOverGameObject())
+                    return;
                 Vector3 clickPosition = new Vector3();
 
                 Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
