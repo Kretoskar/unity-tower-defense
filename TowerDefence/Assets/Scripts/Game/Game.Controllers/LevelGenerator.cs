@@ -8,7 +8,7 @@ namespace Game.Controllers
     public class LevelGenerator : MonoBehaviour
     {
         [SerializeField]
-        private LevelGeneratorSO _levelGeneratorSO;
+        private LevelGeneratorSO _levelGeneratorSO = null;
 
         private int _tileCount = 0;
         private int _currentX;

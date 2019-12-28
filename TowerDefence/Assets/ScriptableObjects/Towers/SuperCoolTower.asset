@@ -16,7 +16,7 @@ MonoBehaviour:
   _name: SuperCoolTower
   _damage: 50
   _timeBetweenShots: 1
-  _range: 5
+  _range: 10
   _towerImage: {fileID: 0}
   _prefab: {fileID: 1569588903341491961, guid: a383b9b5430137a4181aba2c0fddc851, type: 3}
   _projectilePrefab: {fileID: 8136283291608896268, guid: 5d53f2952e628a145ab48cf8ef31667e,

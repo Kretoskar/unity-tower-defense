@@ -37,10 +37,14 @@ namespace Game.Gameplay.Towers
         /// </summary>
         private void LookAtMob()
         {
-            if (_currentMob != null)
+            if (_currentMob != null && Vector3.Distance(transform.position, _currentMob.gameObject.transform.position) <= _towerSO.Range)
             {
                 Vector3 lookAtPosition = new Vector3(_currentMob.transform.position.x, transform.position.y, _currentMob.transform.position.z);
                 transform.LookAt(_currentMob.transform);
+            }
+            else
+            {
+                FindMob();
             }
         }
 
@@ -52,18 +56,18 @@ namespace Game.Gameplay.Towers
             _mobs = new List<Mob>(FindObjectsOfType<Mob>());
             foreach (var mob in _mobs)
             {
-                if (_currentMob == null)
-                {
-                    _currentMob = mob;
-                    continue;
-                }
                 if (_towerSO == null)
                     continue;
+                if (Vector3.Distance(transform.position, mob.gameObject.transform.position) <= _towerSO.Range)
+                {
+                    _currentMob = mob;
+                }
                 if (Vector3.Distance(transform.position, mob.gameObject.transform.position) <= _towerSO.Range)
                 {
                     if(Vector3.Distance(mob.transform.position, _lastWaypointPosition)
                         < Vector3.Distance(_currentMob.transform.position, _lastWaypointPosition))
                     {
+                        print("x");
                         _currentMob = mob;
                     }
                 }
@@ -75,7 +79,7 @@ namespace Game.Gameplay.Towers
         /// </summary>
         private IEnumerator ShootCoroutine()
         {
-            if (_currentMob != null)
+            if (_currentMob != null && Vector3.Distance(transform.position, _currentMob.gameObject.transform.position) <= _towerSO.Range)
             {
                 GameObject projectileGO = Instantiate(_towerSO.ProjectilePrefab, transform.position, Quaternion.identity);
                 Projectile projectile = projectileGO.GetComponent<Projectile>();

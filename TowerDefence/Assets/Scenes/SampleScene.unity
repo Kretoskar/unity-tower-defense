@@ -483,6 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 50
+  _scrollSpeed: 100
 --- !u!1 &1034158071
 GameObject:
   m_ObjectHideFlags: 0
