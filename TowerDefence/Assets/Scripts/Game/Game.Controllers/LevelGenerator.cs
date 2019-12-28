@@ -13,6 +13,8 @@ namespace Game.Controllers
         private int _tileCount = 0;
         private int _currentX;
         private int _currentZ;
+        private PathWay _currentPathWay;
+        private PathWay _desiredPathWay;
         private Vector3 _entrancePosition;
         private GameObject _parent;
         private GameObject _pathParent;
@@ -43,17 +45,22 @@ namespace Game.Controllers
             _tileCount = 1;
 
             bool shouldTurn = false;
+            _currentPathWay = PathWay.Right;
+            _desiredPathWay = PathWay.None;
 
             //Spawn path
             do
             {
-                if (_currentZ == 1)
+                //Check if should turn
+                if (_currentZ <= 2 && _currentPathWay != PathWay.Right)
                 {
                     shouldTurn = true;
+                    _desiredPathWay = PathWay.Right;
                 }
-                else if(_currentZ == 100)
+                else if(_currentZ >= 99 && _currentPathWay != PathWay.Right)
                 {
                     shouldTurn = true;
+                    _desiredPathWay = PathWay.Right;
                 }
                 else
                 {
@@ -61,10 +68,45 @@ namespace Game.Controllers
                     int randomPercent = UnityEngine.Random.Range(1, 100);
                     shouldTurn = randomPercent <= probability ? true : false;
                 }
+
+                //Change path way if should turn
+                if(shouldTurn)
+                {
+                    if (_desiredPathWay != PathWay.None)
+                    {
+                        _currentPathWay = _desiredPathWay;
+                    }
+                    else
+                    {
+                        if (_currentPathWay == PathWay.Top || _currentPathWay == PathWay.Bottom)
+                        {
+                            _currentPathWay = PathWay.Right;
+                        }
+                        else
+                        {
+                            int rand = UnityEngine.Random.Range(0, 2);
+                            _currentPathWay = rand == 0 ? PathWay.Top : PathWay.Bottom;
+                        }
+                    }
+                }
+
+                Vector3 position = Vector3.zero;
+                switch(_currentPathWay)
+                {
+                    case PathWay.Right:
+                        _currentX += 1;
+                        break;
+                    case PathWay.Top:
+                        _currentZ += 1;
+                        break;
+                    case PathWay.Bottom:
+                        _currentZ -= 1;
+                        break;
+                }
                 SpawnTile(new Vector3(_currentX, _entrancePosition.y, _currentZ));
-                _currentX++;
                 shouldTurn = false;
-            } while (_currentX <= _levelGeneratorSO.LevelWidth);
+                _desiredPathWay = PathWay.None;
+            } while (_currentX < _levelGeneratorSO.LevelWidth);
         }
 
         private void SpawnTile(Vector3 position)
@@ -74,5 +116,13 @@ namespace Game.Controllers
             tile.transform.parent = _pathParent.transform;
             _tileCount++;
         }
+    }
+
+    public enum PathWay
+    {
+        Top,
+        Right,
+        Bottom,
+        None
     }
 }
