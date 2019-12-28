@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using Game.Gameplay.Towers;
 
 
@@ -22,6 +23,8 @@ namespace Game.Controllers
         private Image _speedBar = null;
         [SerializeField]
         private Image _rangeBar = null;
+        [SerializeField]
+        private TextMeshProUGUI _goldText = null;
 
         private TowerSpawner _towerSpawner;
         private PlayerStats _playerStats;
@@ -31,6 +34,13 @@ namespace Game.Controllers
             _playerStats = FindObjectOfType<PlayerStats>();
             _towerSpawner = FindObjectOfType<TowerSpawner>();
             _playerStats.HealthChanged += UpdateHealthBar;
+            _playerStats.GoldChanged += UpdateGold;
+            _goldText.text = _playerStats.Gold.ToString();
+        }
+
+        public void UpdateGold(int gold)
+        {
+            _goldText.text = _playerStats.Gold.ToString();
         }
 
         public void UpdateHealthBar(int currHealth)

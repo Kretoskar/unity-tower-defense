@@ -1,4 +1,5 @@
-﻿using Game.Gameplay.Towers;
+﻿using Game.Controllers;
+using Game.Gameplay.Towers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace Game.Gameplay.Towers
         private List<TowerSO> _towers = null;
 
         private PlayerInput _playerInput = null;
+        private PlayerStats _playerStats = null;
 
         public int SelectedTower { get; set; }
         public TowerSO SelectedTowerSO
@@ -27,6 +29,7 @@ namespace Game.Gameplay.Towers
         private void Start()
         {
             _playerInput = FindObjectOfType<PlayerInput>();
+            _playerStats = FindObjectOfType<PlayerStats>();
             _playerInput.PlayerClicked += SpawnTurret;
             SelectedTower = -1;
         }
@@ -42,6 +45,9 @@ namespace Game.Gameplay.Towers
                 return;
             if (SelectedTower == -1)
                 return;
+            if (_playerStats.Gold < _towers[SelectedTower].Cost)
+                return;
+            _playerStats.Gold -= _towers[SelectedTower].Cost;
             int turretIndex = UnityEngine.Random.Range(0, _towers.Count);
             GameObject towerGO = Instantiate(_towers[SelectedTower].Prefab, new Vector3(position.x, 0.5f, position.z), Quaternion.identity);
             Tower tower = towerGO.GetComponentInChildren<Tower>();

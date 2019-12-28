@@ -29,6 +29,10 @@ namespace Game.Gameplay.Towers
         [Range(1, 20)]
         private float _range = 3;
 
+        [SerializeField]
+        [Range(1, 1000)]
+        private int _cost;
+
         public float MaxDamage { get => 100; }
         public float MaxSpeed { get => 1; }
         public float MaxRange { get => 20; }
@@ -50,5 +54,6 @@ namespace Game.Gameplay.Towers
         public int Id { get => _id; set => _id = value; }
         public float Range { get => _range; set => _range = value; }
         public GameObject ProjectilePrefab { get => _projectilePrefab; set => _projectilePrefab = value; }
+        public int Cost { get => _cost; set => _cost = value; }
     }
 }

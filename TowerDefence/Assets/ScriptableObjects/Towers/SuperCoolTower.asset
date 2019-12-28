@@ -17,6 +17,7 @@ MonoBehaviour:
   _damage: 50
   _timeBetweenShots: 0.5
   _range: 10
+  _cost: 50
   _towerImage: {fileID: 21300000, guid: 7a64bf47035ff5e41b8b0ae74ccd2ade, type: 3}
   _prefab: {fileID: 1569588903341491961, guid: a383b9b5430137a4181aba2c0fddc851, type: 3}
   _projectilePrefab: {fileID: 8136283291608896268, guid: 5d53f2952e628a145ab48cf8ef31667e,

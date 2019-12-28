@@ -98,6 +98,7 @@ namespace Game.Gameplay.Mobs
         /// </summary>
         private void Die()
         {
+            FindObjectOfType<PlayerStats>().Gold += _mobSO.GoldAddedToPlayerOnDeath;
             Death?.Invoke();
             Destroy(gameObject);
         }
