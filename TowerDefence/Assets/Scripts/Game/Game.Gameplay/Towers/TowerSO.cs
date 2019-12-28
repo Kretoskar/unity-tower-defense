@@ -22,15 +22,19 @@ namespace Game.Gameplay.Towers
         private float _damage = 10;
 
         [SerializeField]
-        [Range(0.1f, 10)]
+        [Range(0.1f, 1)]
         private float _timeBetweenShots = 1;
 
         [SerializeField]
-        [Range(1, 100)]
+        [Range(1, 20)]
         private float _range = 3;
 
+        public float MaxDamage { get => 100; }
+        public float MaxSpeed { get => 1; }
+        public float MaxRange { get => 20; }
+
         [SerializeField]
-        private Image _towerImage = null;
+        private Sprite _towerImage = null;
 
         [SerializeField]
         private GameObject _prefab = null;
@@ -39,7 +43,7 @@ namespace Game.Gameplay.Towers
         private GameObject _projectilePrefab = null;
 
         public GameObject Prefab { get => _prefab; set => _prefab = value; }
-        public Image TowerImage { get => _towerImage; set => _towerImage = value; }
+        public Sprite TowerImage { get => _towerImage; set => _towerImage = value; }
         public float ShotsPerSecond { get => _timeBetweenShots; set => _timeBetweenShots = value; }
         public float Damage { get => _damage; set => _damage = value; }
         public string Name { get => _name; set => _name = value; }

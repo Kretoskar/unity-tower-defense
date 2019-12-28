@@ -16,8 +16,8 @@ MonoBehaviour:
   _name: CoolTower
   _damage: 3
   _timeBetweenShots: 0.1
-  _range: 10
-  _towerImage: {fileID: 0}
+  _range: 5
+  _towerImage: {fileID: 21300000, guid: 6e2408f6461d2b94183035dd9c52dd35, type: 3}
   _prefab: {fileID: 4378490683778647363, guid: 7786510212ec9784594476b794d5bb10, type: 3}
   _projectilePrefab: {fileID: 8136283291608896268, guid: 5d53f2952e628a145ab48cf8ef31667e,
     type: 3}

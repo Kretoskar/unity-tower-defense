@@ -13,7 +13,15 @@ namespace Game.Controllers
     public class UIController : MonoBehaviour
     {
         [SerializeField]
-        private Image _healthBar;
+        private Image _healthBar = null;
+        [SerializeField]
+        private Image _turretAvatar = null;
+        [SerializeField]
+        private Image _damageBar = null;
+        [SerializeField]
+        private Image _speedBar = null;
+        [SerializeField]
+        private Image _rangeBar = null;
 
         private TowerSpawner _towerSpawner;
         private PlayerStats _playerStats;
@@ -28,9 +36,7 @@ namespace Game.Controllers
         public void UpdateHealthBar(int currHealth)
         {
             int maxHealth = _playerStats.MaxHealth;
-            float fillAmount = ((float)currHealth / (float)maxHealth);
-            print(fillAmount);
-            _healthBar.fillAmount = fillAmount;
+            _healthBar.fillAmount = ((float)currHealth / (float)maxHealth);
         }
 
         /// <summary>
@@ -40,6 +46,11 @@ namespace Game.Controllers
         public void SelectTower(int index)
         {
             _towerSpawner.SelectedTower = index - 1;
+            TowerSO towerSO = _towerSpawner.SelectedTowerSO;
+            _turretAvatar.sprite = towerSO.TowerImage;
+            _damageBar.fillAmount = ((float)towerSO.Damage / (float)towerSO.MaxDamage);
+            _speedBar.fillAmount = ((towerSO.MaxSpeed - (float)towerSO.ShotsPerSecond) / (float)towerSO.MaxSpeed);
+            _rangeBar.fillAmount = ((float)towerSO.Range / (float)towerSO.MaxRange);
         }
     }
 }

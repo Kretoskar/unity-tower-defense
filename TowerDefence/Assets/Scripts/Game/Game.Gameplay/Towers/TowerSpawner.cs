@@ -16,6 +16,13 @@ namespace Game.Gameplay.Towers
         private PlayerInput _playerInput = null;
 
         public int SelectedTower { get; set; }
+        public TowerSO SelectedTowerSO
+        {
+            get
+            {
+                return _towers[SelectedTower];
+            }
+        }
 
         private void Start()
         {
