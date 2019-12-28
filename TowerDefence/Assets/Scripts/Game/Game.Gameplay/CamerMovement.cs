@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Game.Controllers;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,8 +16,17 @@ namespace Game.Gameplay
         private int _highClamp;
         private int _lowScrollClamp;
         private int _highScrollClamp;
+        private int _maxRotation;
+        private float _percentOfRotation;
+
+        private LevelGenerator _levelGenerator;
 
         private void Start()
+        {
+            InjectDataFromScriptableObject();
+        }
+
+        private void InjectDataFromScriptableObject()
         {
             _speed = _cameraSO.Speed;
             _scrollSpeed = _cameraSO.ScrollSpeed;
@@ -24,6 +34,7 @@ namespace Game.Gameplay
             _highClamp = _cameraSO.HighClamp;
             _lowScrollClamp = _cameraSO.ScrollLowClamp;
             _highScrollClamp = _cameraSO.ScrollHighClamp;
+            _maxRotation = _cameraSO.MaxRotation;
         }
 
         private void Update()
@@ -35,6 +46,9 @@ namespace Game.Gameplay
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, _lowClamp, _highClamp), 
                 Mathf.Clamp(transform.position.y, _lowScrollClamp, _highScrollClamp), 
                 Mathf.Clamp(transform.position.z, _lowClamp, _highClamp));
+            float percentOfRotation = (transform.position.y - _lowScrollClamp) / (_highScrollClamp - _lowScrollClamp);
+            float rot = 90 - _maxRotation * (1 - percentOfRotation);
+            transform.rotation = Quaternion.Euler(rot, 0, 0);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Gameplay;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace Game.Controllers
         private int _tileCount = 0;
         private int _currentX;
         private int _currentZ;
+        private float _minZ;
+        private float _maxZ;
         private PathWay _currentPathWay;
         private PathWay _desiredPathWay;
         private Vector3 _entrancePosition;
@@ -21,17 +24,28 @@ namespace Game.Controllers
         private GameObject _ground;
         private PathController _pathController;
 
+        public GameObject Ground { get => _ground; set => _ground = value; }
+
         private void Start()
         {
             _pathController = FindObjectOfType<PathController>();
 
             _parent = new GameObject("Level");
-            _ground = Instantiate(_levelGeneratorSO.Ground, new Vector3(0,0), Quaternion.identity);
-            _ground.transform.localScale = new Vector3(_levelGeneratorSO.LevelWidth, 1, _levelGeneratorSO.LevelHeight);
-            _ground.transform.parent = _parent.transform;
-            _ground.name = "Ground";
-            _ground.transform.position = new Vector3(_levelGeneratorSO.LevelWidth / 2 + 0.5f, 0, _levelGeneratorSO.LevelHeight / 2 + 0.5f);
             SpawnPath();
+            SpawnGround();
+            FindObjectOfType<CamerMovement>().transform.position = new Vector3(
+                _ground.transform.position.x,
+                999, //will be clamped in update
+                _ground.transform.position.z);
+        }
+
+        private void SpawnGround()
+        {
+            Ground = Instantiate(_levelGeneratorSO.Ground, new Vector3(0, 0), Quaternion.identity);
+            Ground.transform.position = new Vector3(_levelGeneratorSO.LevelWidth / 2 + 0.5f, -50, _minZ + (_maxZ - _minZ)/2);
+            Ground.transform.localScale = new Vector3(_levelGeneratorSO.LevelWidth, 100,  _maxZ - _minZ + 5);
+            Ground.transform.parent = _parent.transform;
+            Ground.name = "Ground";
         }
 
         private void SpawnPath()
@@ -40,6 +54,8 @@ namespace Game.Controllers
             _pathParent = new GameObject("Path");
             _pathParent.transform.parent = _parent.transform;
             _entrancePosition = new Vector3(1, _levelGeneratorSO.PathHeight, UnityEngine.Random.Range(1, _levelGeneratorSO.LevelHeight));
+            _minZ = _entrancePosition.z;
+            _maxZ = _minZ;
             GameObject entrance = Instantiate(_levelGeneratorSO.PathTile, _entrancePosition, Quaternion.identity);
             entrance.name = "Path entrance tile";
             entrance.transform.parent = _pathParent.transform;
@@ -128,10 +144,19 @@ namespace Game.Controllers
                 //Reset the vars
                 shouldTurn = false;
                 _desiredPathWay = PathWay.None;
+
+                if (_currentZ < _minZ)
+                    _minZ = _currentZ;
+                if (_currentZ > _maxZ)
+                    _maxZ = _currentZ;
             } while (_currentX < _levelGeneratorSO.LevelWidth);
 
             //Add last waypoint
             _pathController.WayPoints.Add(new Vector3(_currentX, 1 + _entrancePosition.y, _currentZ));
+            if (_currentZ < _minZ)
+                _minZ = _currentZ;
+            if (_currentZ > _maxZ)
+                _maxZ = _currentZ;
         }
 
         private void SpawnTile(Vector3 position)

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 20
   _scrollSpeed: 50
-  _lowClamp: 1
-  _highClamp: 100
+  _lowClamp: -200
+  _highClamp: 200
   _scrollLowClamp: 10
-  _scrollHighClamp: 100
+  _scrollHighClamp: 50
+  _maxRotation: 20
