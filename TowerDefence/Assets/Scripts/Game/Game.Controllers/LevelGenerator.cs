@@ -19,9 +19,12 @@ namespace Game.Controllers
         private GameObject _parent;
         private GameObject _pathParent;
         private GameObject _ground;
+        private PathController _pathController;
 
         private void Start()
         {
+            _pathController = FindObjectOfType<PathController>();
+
             _parent = new GameObject("Level");
             _ground = Instantiate(_levelGeneratorSO.Ground, new Vector3(0,0), Quaternion.identity);
             _ground.transform.localScale = new Vector3(_levelGeneratorSO.LevelWidth, 1, _levelGeneratorSO.LevelHeight);
@@ -44,6 +47,7 @@ namespace Game.Controllers
             _currentZ = (int)_entrancePosition.z;
             _tileCount = 1;
 
+            _pathController.WayPoints.Add(new Vector3(_currentX, 1 + _entrancePosition.y, _currentZ));
             bool shouldTurn = false;
             _currentPathWay = PathWay.Right;
             _desiredPathWay = PathWay.None;
@@ -72,6 +76,10 @@ namespace Game.Controllers
                 //Change path way if should turn
                 if(shouldTurn)
                 {
+                    //Add a waypoint, so that the mobs know when to turn
+                    _pathController.WayPoints.Add(new Vector3(_currentX, 1 + _entrancePosition.y, _currentZ));
+
+                    //Sanity check for going out of ground
                     if (_desiredPathWay != PathWay.None)
                     {
                         _currentPathWay = _desiredPathWay;
@@ -91,6 +99,8 @@ namespace Game.Controllers
                 }
 
                 Vector3 position = Vector3.zero;
+
+                //Set position according to current way
                 switch(_currentPathWay)
                 {
                     case PathWay.Right:
@@ -103,10 +113,17 @@ namespace Game.Controllers
                         _currentZ -= 1;
                         break;
                 }
+
+                //Spawn the tile
                 SpawnTile(new Vector3(_currentX, _entrancePosition.y, _currentZ));
+
+                //Reset the vars
                 shouldTurn = false;
                 _desiredPathWay = PathWay.None;
             } while (_currentX < _levelGeneratorSO.LevelWidth);
+
+            //Add last waypoint
+            _pathController.WayPoints.Add(new Vector3(_currentX, 1 + _entrancePosition.y, _currentZ));
         }
 
         private void SpawnTile(Vector3 position)

@@ -14,6 +14,7 @@ namespace Game.Gameplay.Mobs
         private MobSpawnerSO _mobSpawnerSO = null;
 
         private PathController _pathController;
+        private GameObject _mobsParent;
 
         private bool _waveEnded = true;
 
@@ -21,6 +22,7 @@ namespace Game.Gameplay.Mobs
         {
             _waveEnded = true;
             _pathController = FindObjectOfType<PathController>();
+            _mobsParent = new GameObject("Mobs");
         }
 
         private void Update()
@@ -64,6 +66,8 @@ namespace Game.Gameplay.Mobs
             _waveEnded = false;
             int mobIndex = UnityEngine.Random.Range(0, currentWave.MobTypes.Count);
             GameObject mobGO = Instantiate(currentWave.MobTypes[mobIndex].Prefab, Vector3.zero, Quaternion.identity);
+            mobGO.transform.parent = _mobsParent.transform;
+            mobGO.name = "Mob";
             Mob mob = mobGO.GetComponent<Mob>();
             mobGO.name = mobGO.name + currentMob;
             if(mob != null)

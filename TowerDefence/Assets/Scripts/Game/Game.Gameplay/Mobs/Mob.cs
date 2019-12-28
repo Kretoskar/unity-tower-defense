@@ -65,14 +65,13 @@ namespace Game.Gameplay.Mobs
             if (ReachedWaypoint())
             {
                 _currentWaypointIndex++;
-                if(_currentWaypointIndex == _pathController.WayPoints.Count)
+                if (_currentWaypointIndex == _pathController.WayPoints.Count)
                 {
                     ReachedEndOfPath();
                     return;
                 }
             }
             transform.position = Vector3.MoveTowards(transform.position, _pathController.WayPoints[_currentWaypointIndex], _mobSO.Speed * Time.deltaTime);
-
         }
 
         /// <summary>

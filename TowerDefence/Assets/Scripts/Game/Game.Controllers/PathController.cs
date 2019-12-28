@@ -9,9 +9,13 @@ namespace Game.Controllers
     /// </summary>
     public class PathController : MonoBehaviour
     {
-        [SerializeField]
-        private List<Vector3> _wayPoints = null;
+        private List<Vector3> _wayPoints;
 
-        public List<Vector3> WayPoints { get => _wayPoints; set => _wayPoints = value; }
+        public List<Vector3> WayPoints { get => _wayPoints; }
+
+        private void Awake()
+        {
+            _wayPoints = new List<Vector3>();
+        }
     }
 }
