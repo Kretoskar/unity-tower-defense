@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Game.Controllers
 {
+    /// <summary>
+    /// Sets up a grid for towers to be placed 
+    /// </summary>
     public class GridController : MonoBehaviour
     {
         [SerializeField]
@@ -21,9 +24,15 @@ namespace Game.Controllers
             InjectDataFromSciptableObject();
         }
 
+        /// <summary>
+        /// Given a Vector3, the method returns 
+        /// the closest grid cell's position to the given position
+        /// </summary>
+        /// <param name="position">Closest grid cell's position to given position</param>
+        /// <returns></returns>
         public Vector3 GetClosestGridPosition(Vector3 position)
         {
-            if(position.x >= 11 || position.x <= -1 || position.y >= 11 || position.y <=-1)
+            if(position.x >= _gridX + 0.5f || position.x <= -0.5f || position.y >= _gridY + 0.5f || position.y <= -0.5f)
             {
                 Debug.Log("This position is out of range, it will be given (0,0) position");
                 return Vector3.zero;

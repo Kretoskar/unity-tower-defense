@@ -74,8 +74,8 @@
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Projectile.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Towers\Tower.cs" />
-    <Compile Include="Assets\Scripts\Game\Game.Gameplay\TowerSO.cs" />
-    <Compile Include="Assets\Scripts\Game\Game.Gameplay\TowerSpawner.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Gameplay\Towers\TowerSO.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Gameplay\Towers\TowerSpawner.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/kogut/Desktop/Projekty/TowerDefence/TowerDefence/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

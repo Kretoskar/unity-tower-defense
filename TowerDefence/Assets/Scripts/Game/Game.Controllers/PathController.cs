@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Game.Controllers
 {
+    /// <summary>
+    /// Sets up path's waypoints
+    /// </summary>
     public class PathController : MonoBehaviour
     {
         [SerializeField]

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4719210719939542875}
-  - component: {fileID: 1295798405140240600}
   m_Layer: 0
   m_Name: TowerSpawner
   m_TagString: Untagged
@@ -31,19 +30,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1295798405140240600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2483940077419645398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f793f6178a5d578439fe607b13c10c2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _towers:
-  - {fileID: 11400000, guid: 397aba766707ff04e9c69899fe60b0be, type: 2}
-  - {fileID: 11400000, guid: dcfd2d7d29e48d5438c304cc01772237, type: 2}
-  - {fileID: 11400000, guid: 70b100e104aa43c49aa9807a911f40dc, type: 2}

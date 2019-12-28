@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace Game.Gameplay.Towers
 {
+    /// <summary>
+    /// Tower related behaviour
+    /// </summary>
     public class Tower : MonoBehaviour
     {
         private Mob _currentMob;
@@ -29,6 +32,9 @@ namespace Game.Gameplay.Towers
             LookAtMob();
         }
 
+        /// <summary>
+        /// Look at the currently aimed mob
+        /// </summary>
         private void LookAtMob()
         {
             if (_currentMob != null)
@@ -38,6 +44,9 @@ namespace Game.Gameplay.Towers
             }
         }
 
+        /// <summary>
+        /// Find a mob to look at
+        /// </summary>
         private void FindMob()
         {
             _mobs = new List<Mob>(FindObjectsOfType<Mob>());
@@ -48,6 +57,8 @@ namespace Game.Gameplay.Towers
                     _currentMob = mob;
                     continue;
                 }
+                if (_towerSO == null)
+                    continue;
                 if (Vector3.Distance(transform.position, mob.gameObject.transform.position) <= _towerSO.Range)
                 {
                     if(Vector3.Distance(mob.transform.position, _lastWaypointPosition)
@@ -59,6 +70,9 @@ namespace Game.Gameplay.Towers
             }
         }
 
+        /// <summary>
+        /// Shoot continously
+        /// </summary>
         private IEnumerator ShootCoroutine()
         {
             if (_currentMob != null)
@@ -71,7 +85,14 @@ namespace Game.Gameplay.Towers
                     projectile.Damage = (int)_towerSO.Damage;
                 }
             }
-            yield return new WaitForSeconds(_towerSO.ShotsPerSecond);
+            if (_towerSO != null)
+            {
+                yield return new WaitForSeconds(_towerSO.ShotsPerSecond);
+            }
+            else
+            {
+                yield return new WaitForSeconds(10);
+            }
             StartCoroutine(ShootCoroutine());
         }
     }

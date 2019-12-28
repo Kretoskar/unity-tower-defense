@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Game.Gameplay.Mobs
 {
+    /// <summary>
+    /// Mob data
+    /// </summary>
     [CreateAssetMenu(menuName = "ScriptableObject/Mob", fileName = "Mob")]
     public class MobSO : ScriptableObject
     {

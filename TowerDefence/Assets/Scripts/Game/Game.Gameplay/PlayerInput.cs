@@ -6,6 +6,9 @@ using System;
 
 namespace Game.Gameplay
 {
+    /// <summary>
+    /// Provides an action with player's click position
+    /// </summary>
     public class PlayerInput : MonoBehaviour
     {
         private Camera _mainCamera;
@@ -24,6 +27,9 @@ namespace Game.Gameplay
             GetClickedCellPosition();
         }
 
+        /// <summary>
+        /// Get closest grid cell's position to the user's click position
+        /// </summary>
         private void GetClickedCellPosition()
         {
             if (Input.GetMouseButtonDown(0))

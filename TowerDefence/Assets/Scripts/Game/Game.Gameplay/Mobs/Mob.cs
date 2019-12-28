@@ -6,6 +6,9 @@ using System;
 
 namespace Game.Gameplay.Mobs
 {
+    /// <summary>
+    /// Mob behaviour
+    /// </summary>
     public class Mob : MonoBehaviour
     {
         protected float _waypointTolerance = .1f;
@@ -33,12 +36,6 @@ namespace Game.Gameplay.Mobs
             }
         }
 
-        private void Die()
-        {
-            Death?.Invoke();
-            Destroy(gameObject);
-        }
-
         private void Start()
         {
             Initialize();
@@ -49,6 +46,9 @@ namespace Game.Gameplay.Mobs
             Move();
         }
 
+        /// <summary>
+        /// Initialize properties 
+        /// </summary>
         protected virtual void Initialize()
         {
             Health = (int)_mobSO.Health;
@@ -57,6 +57,9 @@ namespace Game.Gameplay.Mobs
             transform.position = _pathController.WayPoints[_currentWaypointIndex];
         }
 
+        /// <summary>
+        /// Move through waypoints
+        /// </summary>
         protected virtual void Move()
         {
             if (ReachedWaypoint())
@@ -72,15 +75,31 @@ namespace Game.Gameplay.Mobs
 
         }
 
-        private void ReachedEndOfPath()
+        /// <summary>
+        /// Behaviour on reaching end of the path 
+        /// </summary>
+        protected void ReachedEndOfPath()
         {
-            Death?.Invoke();
-            Destroy(gameObject);
+            Die();
         }
 
+        /// <summary>
+        /// Check if current position is close enough 
+        /// to a waypoint, to change the waypoint
+        /// </summary>
+        /// <returns></returns>
         protected virtual bool ReachedWaypoint()
         {
             return Vector3.Distance(transform.position, _pathController.WayPoints[_currentWaypointIndex]) < _waypointTolerance;
+        }
+
+        /// <summary>
+        /// Invoke death action and destroy itself on death
+        /// </summary>
+        private void Die()
+        {
+            Death?.Invoke();
+            Destroy(gameObject);
         }
     }
 

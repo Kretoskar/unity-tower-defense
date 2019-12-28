@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Game.Controllers
 {
+    /// <summary>
+    /// Data for the grid
+    /// </summary>
     [CreateAssetMenu(menuName = "ScriptableObject/Grid", fileName = "Grid")]
     public class GridSO : ScriptableObject
     {

@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Gameplay
+namespace Game.Gameplay.Towers
 {
+    /// <summary>
+    /// Provides method for spawning towers on the grid
+    /// </summary>
     public class TowerSpawner : MonoBehaviour
     {
         [SerializeField]
@@ -21,6 +24,11 @@ namespace Game.Gameplay
             SelectedTower = -1;
         }
 
+        /// <summary>
+        /// Instantiate a tower at the closest 
+        /// grid cell's position to player's click position
+        /// </summary>
+        /// <param name="position">click position</param>
         private void SpawnTurret(Vector3 position)
         {
             if (position.x == 0 && position.z == 0)
@@ -29,7 +37,7 @@ namespace Game.Gameplay
                 return;
             int turretIndex = UnityEngine.Random.Range(0, _towers.Count);
             GameObject towerGO = Instantiate(_towers[SelectedTower].Prefab, position, Quaternion.identity);
-            Tower tower = towerGO.GetComponent<Tower>();
+            Tower tower = towerGO.GetComponentInChildren<Tower>();
             if (tower != null)
                 tower.TowerSO = _towers[SelectedTower];
         }

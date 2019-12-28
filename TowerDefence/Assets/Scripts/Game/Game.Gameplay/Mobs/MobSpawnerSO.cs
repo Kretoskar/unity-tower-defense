@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Game.Gameplay.Mobs
 {
+    /// <summary>
+    /// List of mob waves and how to spawn them
+    /// </summary>
     [CreateAssetMenu(menuName = "ScriptableObject/Mob Spawner", fileName = "Mob Spawner")]
     public class MobSpawnerSO : ScriptableObject
     {

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Game.Gameplay.Mobs
 {
+    /// <summary>
+    /// Mob wave data
+    /// </summary>
     [CreateAssetMenu(menuName = "ScriptableObject/Mob Wave", fileName = "Mob Wave")]
     public class MobWaveSO : ScriptableObject
     {

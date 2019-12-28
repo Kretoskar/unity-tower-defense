@@ -5,6 +5,9 @@ using Game.Controllers;
 
 namespace Game.Gameplay.Mobs
 {
+    /// <summary>
+    /// Handles spawning wave of mobs
+    /// </summary>
     public class MobSpawner : MonoBehaviour
     {
         [SerializeField]
@@ -29,12 +32,19 @@ namespace Game.Gameplay.Mobs
             }
         }
 
+        /// <summary>
+        /// Spawn a random wave of mobs
+        /// </summary>
         public void SpawnWave()
         {
             int waveIndex = UnityEngine.Random.Range(0, _mobSpawnerSO.MobWaves.Count);
             StartCoroutine(StartSpawningCoroutine(waveIndex));
         }
 
+        /// <summary>
+        /// Start spawning waves
+        /// </summary>
+        /// <param name="waveIndex">index of the wave to spawn</param>
         private IEnumerator StartSpawningCoroutine(int waveIndex)
         {
             
@@ -42,6 +52,13 @@ namespace Game.Gameplay.Mobs
            StartCoroutine( SpawnCoroutine(_mobSpawnerSO.MobWaves[waveIndex], _mobSpawnerSO.MobWaves[waveIndex].NumberOfMobs));
         }
 
+        /// <summary>
+        /// Spawn a single wave of mobs
+        /// </summary>
+        /// <param name="currentWave">current wave type</param>
+        /// <param name="mobCount">no. of mobs to spawn</param>
+        /// <param name="currentMob">index of current mob</param>
+        /// <returns></returns>
         private IEnumerator SpawnCoroutine(MobWaveSO currentWave, int mobCount, int currentMob = 0)
         {
             _waveEnded = false;

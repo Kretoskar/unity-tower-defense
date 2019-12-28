@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace Game.Gameplay
 {
+    /// <summary>
+    /// Handles projectile behaviour
+    /// </summary>
     public class Projectile : MonoBehaviour
     {
         private GameObject _target;
@@ -25,18 +28,31 @@ namespace Game.Gameplay
             _targetMob.Death += StopShooting;
         }
 
-        private void StopShooting()
-        {
-            _shouldShoot = false;
-            _lastPosition = _target.transform.position;
-
-        }
-
         private void Update()
         {
             MoveToTarget();
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.tag == "Enemy")
+            {
+                Mob mob = other.gameObject.GetComponent<Mob>();
+                if (mob != null)
+                {
+                    mob.Health -= _damage;
+                }
+            }
+        }
+
+        private void OnDestroy()
+        {
+            _targetMob.Death -= StopShooting;
+        }
+
+        /// <summary>
+        /// Move to the current mob target
+        /// </summary>
         private void MoveToTarget()
         {
             if (_shouldShoot)
@@ -53,22 +69,14 @@ namespace Game.Gameplay
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        /// <summary>
+        /// Set last position to the death position of current mob
+        /// </summary>
+        private void StopShooting()
         {
-            print("col");
-            if (other.gameObject.tag == "Enemy")
-            {
-                Mob mob = other.gameObject.GetComponent<Mob>();
-                if(mob != null)
-                {
-                    mob.Health -= _damage;
-                }
-            }
-        }
+            _shouldShoot = false;
+            _lastPosition = _target.transform.position;
 
-        private void OnDestroy()
-        {
-            _targetMob.Death -= StopShooting;
         }
     }
 }

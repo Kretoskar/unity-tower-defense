@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 2
   _name: CoolTower
-  _damage: 5
-  _timeBetweenShots: 0.5
-  _range: 3
+  _damage: 3
+  _timeBetweenShots: 0.1
+  _range: 2
   _towerImage: {fileID: 0}
-  _prefab: {fileID: 2472561676039020486, guid: 02bebe5d76df9a242a6aa76d42c97f16, type: 3}
+  _prefab: {fileID: 4378490683778647363, guid: 7786510212ec9784594476b794d5bb10, type: 3}
   _projectilePrefab: {fileID: 8136283291608896268, guid: 5d53f2952e628a145ab48cf8ef31667e,
     type: 3}
