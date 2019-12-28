@@ -94,6 +94,14 @@ namespace Game.Controllers
                         {
                             int rand = UnityEngine.Random.Range(0, 2);
                             _currentPathWay = rand == 0 ? PathWay.Top : PathWay.Bottom;
+                            if(_currentZ <= 2)
+                            {
+                                _currentPathWay = PathWay.Top;
+                            }
+                            else if (_currentZ >= 99)
+                            {
+                                _currentPathWay = PathWay.Bottom;
+                            }
                         }
                     }
                 }

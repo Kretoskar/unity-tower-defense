@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cellX: 1
   _cellY: 1
-  _gridX: 10
-  _gridY: 10
+  _gridX: 100
+  _gridY: 100

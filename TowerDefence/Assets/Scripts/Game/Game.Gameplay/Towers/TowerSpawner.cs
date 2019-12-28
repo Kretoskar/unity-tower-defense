@@ -36,7 +36,7 @@ namespace Game.Gameplay.Towers
             if (SelectedTower == -1)
                 return;
             int turretIndex = UnityEngine.Random.Range(0, _towers.Count);
-            GameObject towerGO = Instantiate(_towers[SelectedTower].Prefab, position, Quaternion.identity);
+            GameObject towerGO = Instantiate(_towers[SelectedTower].Prefab, new Vector3(position.x, 0.5f, position.z), Quaternion.identity);
             Tower tower = towerGO.GetComponentInChildren<Tower>();
             if (tower != null)
                 tower.TowerSO = _towers[SelectedTower];

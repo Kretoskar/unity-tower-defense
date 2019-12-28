@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\Game\Game.Controllers\LevelGeneratorSO.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Controllers\PathController.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Controllers\UIController.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Gameplay\CamerMovement.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Mobs\Mob.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Mobs\MobSO.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Mobs\MobSpawner.cs" />

@@ -57,11 +57,11 @@ namespace Game.Gameplay
         {
             if (_shouldShoot)
             {
-                transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, Time.deltaTime * 10);
+                transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, Time.deltaTime * 100);
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, _lastPosition, Time.deltaTime * 10);
+                transform.position = Vector3.MoveTowards(transform.position, _lastPosition, Time.deltaTime * 100);
             }
             if(transform.position == _lastPosition)
             {
