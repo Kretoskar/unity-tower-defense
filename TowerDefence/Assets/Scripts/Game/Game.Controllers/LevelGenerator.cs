@@ -12,6 +12,7 @@ namespace Game.Controllers
 
         private int _tileCount = 0;
         private int _currentX;
+        private int _currentZ;
         private Vector3 _entrancePosition;
         private GameObject _parent;
         private GameObject _pathParent;
@@ -38,11 +39,31 @@ namespace Game.Controllers
             entrance.name = "Path entrance tile";
             entrance.transform.parent = _pathParent.transform;
             _currentX = 1;
+            _currentZ = (int)_entrancePosition.z;
             _tileCount = 1;
+
+            bool shouldTurn = false;
+
+            //Spawn path
             do
             {
-                SpawnTile(new Vector3(_currentX, _entrancePosition.y, _entrancePosition.z));
+                if (_currentZ == 1)
+                {
+                    shouldTurn = true;
+                }
+                else if(_currentZ == 100)
+                {
+                    shouldTurn = true;
+                }
+                else
+                {
+                    int probability = _levelGeneratorSO.CurveChance;
+                    int randomPercent = UnityEngine.Random.Range(1, 100);
+                    shouldTurn = randomPercent <= probability ? true : false;
+                }
+                SpawnTile(new Vector3(_currentX, _entrancePosition.y, _currentZ));
                 _currentX++;
+                shouldTurn = false;
             } while (_currentX <= _levelGeneratorSO.LevelWidth);
         }
 

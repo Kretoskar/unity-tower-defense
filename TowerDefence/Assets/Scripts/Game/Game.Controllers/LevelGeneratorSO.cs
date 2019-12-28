@@ -17,7 +17,7 @@ namespace Game.Controllers
 
         [SerializeField]
         [Range(10, 100)]
-        private int _curvesCount = 10;
+        private int _percentOfChanceForACurveToOccur = 10;
 
         [SerializeField]
         [Range(0.01f, 1)]
@@ -34,5 +34,6 @@ namespace Game.Controllers
         public GameObject Ground { get => _ground; set => _ground = value; }
         public GameObject PathTile { get => _pathTile; set => _pathTile = value; }
         public float PathHeight { get => _pathHeight; set => _pathHeight = value; }
+        public int CurveChance { get => _percentOfChanceForACurveToOccur; set => _percentOfChanceForACurveToOccur = value; }
     }
 }
