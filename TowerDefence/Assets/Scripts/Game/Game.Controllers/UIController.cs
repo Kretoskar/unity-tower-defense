@@ -9,7 +9,7 @@ using Game.Gameplay.Towers;
 namespace Game.Controllers
 {
     /// <summary>
-    /// Contains methods for the UI buttons
+    /// Contains methods for the UI behavioru
     /// </summary>
     public class UIController : MonoBehaviour
     {
@@ -38,11 +38,19 @@ namespace Game.Controllers
             _goldText.text = _playerStats.Gold.ToString();
         }
 
+        /// <summary>
+        /// Update player gold UI
+        /// </summary>
+        /// <param name="gold">just here so that it matches the action</param>
         public void UpdateGold(int gold)
         {
             _goldText.text = _playerStats.Gold.ToString();
         }
 
+        /// <summary>
+        /// Update player health UI
+        /// </summary>
+        /// <param name="currHealth">current player health</param>
         public void UpdateHealthBar(int currHealth)
         {
             int maxHealth = _playerStats.MaxHealth;

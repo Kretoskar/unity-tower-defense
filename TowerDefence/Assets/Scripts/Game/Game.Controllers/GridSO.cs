@@ -26,9 +26,14 @@ namespace Game.Controllers
         [Range(10, 100)]
         private int _gridY = 10;
 
+        [SerializeField]
+        [Range(0.1f, 0.5f)]
+        private float _missTolerance = 0.5f;
+
         public int CellX { get => _cellX; set => _cellX = value; }
         public int CellY { get => _cellY; set => _cellY = value; }
         public int GridX { get => _gridX; set => _gridX = value; }
         public int GridY { get => _gridY; set => _gridY = value; }
+        public float MissTolerance { get => _missTolerance; set => _missTolerance = value; }
     }
 }

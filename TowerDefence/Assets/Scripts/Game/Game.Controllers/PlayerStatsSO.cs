@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace Game.Controllers
 {
+    /// <summary>
+    /// Player stats data
+    /// </summary>
     [CreateAssetMenu(menuName = "ScriptableObject/Player", fileName = "Player")]
     public class PlayerStatsSO : ScriptableObject
     {

@@ -6,10 +6,23 @@ using UnityEngine;
 
 namespace Game.Controllers
 {
+    /// <summary>
+    /// Generates the ground for the towers to be placed 
+    /// and path for mobs
+    /// </summary>
     public class LevelGenerator : MonoBehaviour
     {
         [SerializeField]
         private LevelGeneratorSO _levelGeneratorSO = null;
+
+        //Injected from the scriptable object 
+        private int _levelWidth = 0;
+        private int _levelHeight = 0;
+        private int _percentOfChanceForACurveToOccur = 0;
+        private float _pathHeight = 0;
+        private float _levelDepth = 0;
+        private GameObject _ground = null;
+        private GameObject _pathTile = null;
 
         private int _tileCount = 0;
         private int _currentX;
@@ -21,49 +34,60 @@ namespace Game.Controllers
         private Vector3 _entrancePosition;
         private GameObject _parent;
         private GameObject _pathParent;
-        private GameObject _ground;
         private PathController _pathController;
 
         public GameObject Ground { get => _ground; set => _ground = value; }
 
         private void Start()
         {
+            InjectDataFromScriptableObject();
+
             _pathController = FindObjectOfType<PathController>();
 
-            _parent = new GameObject("Level");
+            SpawnParent();
             SpawnPath();
             SpawnGround();
+
+            //Set camera position on top of the ground
             FindObjectOfType<CamerMovement>().transform.position = new Vector3(
                 _ground.transform.position.x,
                 999, //will be clamped in update
                 _ground.transform.position.z);
         }
 
-        private void SpawnGround()
+        /// <summary>
+        /// Spawn the parent GameObject for the ground and the tiles
+        /// </summary>
+        private void SpawnParent()
         {
-            Ground = Instantiate(_levelGeneratorSO.Ground, new Vector3(0, 0), Quaternion.identity);
-            Ground.transform.position = new Vector3(_levelGeneratorSO.LevelWidth / 2 + 0.5f, -50, _minZ + (_maxZ - _minZ)/2);
-            Ground.transform.localScale = new Vector3(_levelGeneratorSO.LevelWidth, 100,  _maxZ - _minZ + 5);
-            Ground.transform.parent = _parent.transform;
-            Ground.name = "Ground";
+            _parent = new GameObject("Level");
         }
 
+        /// <summary>
+        /// Proceduraly spawn the path for the mobs to move at
+        /// also set waypoints for the path controller so that 
+        /// the mobs know when to turn 
+        /// </summary>
         private void SpawnPath()
         {
             //Spawn path entrance
             _pathParent = new GameObject("Path");
             _pathParent.transform.parent = _parent.transform;
-            _entrancePosition = new Vector3(1, _levelGeneratorSO.PathHeight, UnityEngine.Random.Range(1, _levelGeneratorSO.LevelHeight));
+            _entrancePosition = new Vector3(1, _pathHeight, UnityEngine.Random.Range(1, _levelHeight));
             _minZ = _entrancePosition.z;
             _maxZ = _minZ;
-            GameObject entrance = Instantiate(_levelGeneratorSO.PathTile, _entrancePosition, Quaternion.identity);
+            GameObject entrance = Instantiate(_pathTile, _entrancePosition, Quaternion.identity);
             entrance.name = "Path entrance tile";
             entrance.transform.parent = _pathParent.transform;
             _currentX = 1;
             _currentZ = (int)_entrancePosition.z;
             _tileCount = 1;
 
+            //Add first waypoint
             _pathController.WayPoints.Add(new Vector3(_currentX, 1 + _entrancePosition.y, _currentZ));
+
+            //Serup current vars for the loop 
+            //to know what to do 
             bool shouldTurn = false;
             _currentPathWay = PathWay.Right;
             _desiredPathWay = PathWay.None;
@@ -71,26 +95,26 @@ namespace Game.Controllers
             //Spawn path
             do
             {
-                //Check if should turn
+                //Check if should turn depending on the chances to turn 
                 if (_currentZ <= 2 && _currentPathWay != PathWay.Right)
                 {
                     shouldTurn = true;
                     _desiredPathWay = PathWay.Right;
                 }
-                else if(_currentZ >= 99 && _currentPathWay != PathWay.Right)
+                else if (_currentZ >= 99 && _currentPathWay != PathWay.Right)
                 {
                     shouldTurn = true;
                     _desiredPathWay = PathWay.Right;
                 }
                 else
                 {
-                    int probability = _levelGeneratorSO.CurveChance;
+                    int probability = _percentOfChanceForACurveToOccur;
                     int randomPercent = UnityEngine.Random.Range(1, 100);
                     shouldTurn = randomPercent <= probability ? true : false;
                 }
 
                 //Change path way if should turn
-                if(shouldTurn)
+                if (shouldTurn)
                 {
                     //Add a waypoint, so that the mobs know when to turn
                     _pathController.WayPoints.Add(new Vector3(_currentX, 1 + _entrancePosition.y, _currentZ));
@@ -110,7 +134,7 @@ namespace Game.Controllers
                         {
                             int rand = UnityEngine.Random.Range(0, 2);
                             _currentPathWay = rand == 0 ? PathWay.Top : PathWay.Bottom;
-                            if(_currentZ <= 2)
+                            if (_currentZ <= 2)
                             {
                                 _currentPathWay = PathWay.Top;
                             }
@@ -125,7 +149,7 @@ namespace Game.Controllers
                 Vector3 position = Vector3.zero;
 
                 //Set position according to current way
-                switch(_currentPathWay)
+                switch (_currentPathWay)
                 {
                     case PathWay.Right:
                         _currentX += 1;
@@ -149,7 +173,7 @@ namespace Game.Controllers
                     _minZ = _currentZ;
                 if (_currentZ > _maxZ)
                     _maxZ = _currentZ;
-            } while (_currentX < _levelGeneratorSO.LevelWidth);
+            } while (_currentX < _levelWidth);
 
             //Add last waypoint
             _pathController.WayPoints.Add(new Vector3(_currentX, 1 + _entrancePosition.y, _currentZ));
@@ -159,15 +183,52 @@ namespace Game.Controllers
                 _maxZ = _currentZ;
         }
 
+        /// <summary>
+        /// Spawn the ground, where turrets are meant to be spawned
+        /// </summary>
+        private void SpawnGround()
+        {
+            Ground = Instantiate(_ground, new Vector3(0, 0), Quaternion.identity);
+            Ground.transform.position = new Vector3(
+                _levelWidth / 2 + 0.5f,     // + 0.5f so that the tiles have integer positions
+                (-1) * _levelDepth / 2,     // make the center according to the level depth
+                _minZ + (_maxZ - _minZ)/2); // set the ground position according to path coordinates
+            Ground.transform.localScale = new Vector3(_levelWidth, _levelDepth,  _maxZ - _minZ + 5);    //shrink the ground according to the path coordinates
+            Ground.transform.parent = _parent.transform;
+            Ground.name = "Ground";
+        }
+
+        /// <summary>
+        /// Spawn a single path tile
+        /// </summary>
+        /// <param name="position">position, where to spawn</param>
         private void SpawnTile(Vector3 position)
         {
-            GameObject tile = Instantiate(_levelGeneratorSO.PathTile, position, Quaternion.identity);
+            GameObject tile = Instantiate(_pathTile, position, Quaternion.identity);
             tile.name = "Path tile: " + _tileCount;
             tile.transform.parent = _pathParent.transform;
             _tileCount++;
         }
+
+        /// <summary>
+        /// Set this class's variables to be equal to the one from 
+        /// the scriptable object 
+        /// </summary>
+        private void InjectDataFromScriptableObject()
+        {
+            _levelWidth = _levelGeneratorSO.LevelWidth;
+            _levelHeight = _levelGeneratorSO.LevelHeight;
+            _percentOfChanceForACurveToOccur = _levelGeneratorSO.CurveChance;
+            _pathHeight = _levelGeneratorSO.PathHeight;
+            _ground = _levelGeneratorSO.Ground;
+            _pathTile = _levelGeneratorSO.PathTile;
+            _levelDepth = _levelGeneratorSO.LevelDepth;
+        }
     }
 
+    /// <summary>
+    /// Where is the path currenlty heading
+    /// </summary>
     public enum PathWay
     {
         Top,

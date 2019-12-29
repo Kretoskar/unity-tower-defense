@@ -11,12 +11,14 @@ namespace Game.Controllers
         [SerializeField]
         private PlayerStatsSO _playerStatsSO = null;
 
-        private int _currHealth;
+        //Injected from scriptable object
         private int _maxHealth;
-        private int _currGold;
         private int _startingGold;
-        private int _currHunger;
         private int _maxHunger;
+
+        private int _currHealth;
+        private int _currGold;
+        private int _currHunger;
 
         public Action<int> HealthChanged; 
         public Action<int> HungerChanged; 
@@ -37,11 +39,6 @@ namespace Game.Controllers
                 }
                 HealthChanged?.Invoke(_currHealth);
             }
-        }
-
-        private void Die()
-        {
-            SceneManager.LoadScene(0);
         }
 
         public int Hunger {
@@ -80,6 +77,14 @@ namespace Game.Controllers
             _currHealth = MaxHealth;
             _currGold = StartingGold;
             _currHunger = MaxHunger;
+        }
+
+        /// <summary>
+        /// Reload scene on death
+        /// </summary>
+        private void Die()
+        {
+            SceneManager.LoadScene(0);
         }
 
         private void InjectDataFromScriptableObject()

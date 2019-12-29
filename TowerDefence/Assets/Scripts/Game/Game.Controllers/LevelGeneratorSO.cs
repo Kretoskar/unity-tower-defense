@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Game.Controllers
 {
+    /// <summary>
+    /// Level data
+    /// </summary>
     [CreateAssetMenu(menuName = "ScriptableObject/Level generator", fileName = "Level generator")]
     public class LevelGeneratorSO : ScriptableObject
     {
@@ -24,6 +27,10 @@ namespace Game.Controllers
         private float _pathHeight = 0.1f;
 
         [SerializeField]
+        [Range(1, 100)]
+        private float _levelDepth = 100;
+
+        [SerializeField]
         private GameObject _ground;
 
         [SerializeField]
@@ -35,5 +42,6 @@ namespace Game.Controllers
         public GameObject PathTile { get => _pathTile; set => _pathTile = value; }
         public float PathHeight { get => _pathHeight; set => _pathHeight = value; }
         public int CurveChance { get => _percentOfChanceForACurveToOccur; set => _percentOfChanceForACurveToOccur = value; }
+        public float LevelDepth { get => _levelDepth; set => _levelDepth = value; }
     }
 }

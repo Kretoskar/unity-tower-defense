@@ -9,6 +9,8 @@ namespace Game.Gameplay
     {
         [SerializeField]
         private CameraSO _cameraSO = null;
+        [SerializeField]
+        private Camera _childCamera = null;
 
         private float _speed;
         private float _scrollSpeed;
@@ -41,14 +43,16 @@ namespace Game.Gameplay
         {
             float h = Input.GetAxis("Horizontal");
             float v = Input.GetAxis("Vertical");
-            float z = Input.mouseScrollDelta.y;
-            transform.Translate(new Vector3(h * _speed, v * _speed, z * _scrollSpeed) * Time.deltaTime);
+            float y = Input.mouseScrollDelta.y;
+
+            transform.Translate(new Vector3(h * _speed, -y * _scrollSpeed, v * _speed) * Time.deltaTime);
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, _lowClamp, _highClamp), 
                 Mathf.Clamp(transform.position.y, _lowScrollClamp, _highScrollClamp), 
                 Mathf.Clamp(transform.position.z, _lowClamp, _highClamp));
+
             float percentOfRotation = (transform.position.y - _lowScrollClamp) / (_highScrollClamp - _lowScrollClamp);
             float rot = 90 - _maxRotation * (1 - percentOfRotation);
-            transform.rotation = Quaternion.Euler(rot, 0, 0);
+            _childCamera.transform.rotation = Quaternion.Euler(rot, 0, 0);
         }
     }
 }
