@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6891d90513e65534fb0af9940f16d6f3, type: 3}
-  m_Name: CoolTower
+  m_Name: UltraCoolTower
   m_EditorClassIdentifier: 
-  _id: 2
-  _name: CoolTower
-  _damage: 3
+  _id: 4
+  _name: UltraCoolTower
+  _damage: 4
   _timeBetweenShots: 0.1
-  _range: 5
-  _cost: 20
-  _towerImage: {fileID: 21300000, guid: e816eae62de40534f95d6851e5c571aa, type: 3}
-  _prefab: {fileID: 4378490683778647363, guid: 7786510212ec9784594476b794d5bb10, type: 3}
+  _range: 20
+  _cost: 100
+  _towerImage: {fileID: 21300000, guid: cd4efd3193609dd49804ca61722b96b1, type: 3}
+  _prefab: {fileID: 5390187920671543807, guid: 52918e6591113524896abffc4e31e7c8, type: 3}
   _projectilePrefab: {fileID: 8136283291608896268, guid: 5d53f2952e628a145ab48cf8ef31667e,
     type: 3}

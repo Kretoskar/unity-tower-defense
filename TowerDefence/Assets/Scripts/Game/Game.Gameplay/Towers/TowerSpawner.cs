@@ -22,9 +22,11 @@ namespace Game.Gameplay.Towers
         {
             get
             {
-                return _towers[SelectedTower];
+                return Towers[SelectedTower];
             }
         }
+
+        public List<TowerSO> Towers { get => _towers; set => _towers = value; }
 
         private void Start()
         {
@@ -32,6 +34,16 @@ namespace Game.Gameplay.Towers
             _playerStats = FindObjectOfType<PlayerStats>();
             _playerInput.PlayerClicked += SpawnTurret;
             SelectedTower = -1;
+        }
+
+        /// <summary>
+        /// Set tower index, 
+        /// used by UI
+        /// </summary>
+        /// <param name="index">index of selected tower</param>
+        public void SetTower(int index)
+        {
+            SelectedTower = index;
         }
 
         /// <summary>
@@ -45,14 +57,14 @@ namespace Game.Gameplay.Towers
                 return;
             if (SelectedTower == -1)
                 return;
-            if (_playerStats.Gold < _towers[SelectedTower].Cost)
+            if (_playerStats.Gold < Towers[SelectedTower].Cost)
                 return;
-            _playerStats.Gold -= _towers[SelectedTower].Cost;
-            int turretIndex = UnityEngine.Random.Range(0, _towers.Count);
-            GameObject towerGO = Instantiate(_towers[SelectedTower].Prefab, new Vector3(position.x, 0.5f, position.z), Quaternion.identity);
+            _playerStats.Gold -= Towers[SelectedTower].Cost;
+            int turretIndex = UnityEngine.Random.Range(0, Towers.Count);
+            GameObject towerGO = Instantiate(Towers[SelectedTower].Prefab, new Vector3(position.x, 0.5f, position.z), Quaternion.identity);
             Tower tower = towerGO.GetComponentInChildren<Tower>();
             if (tower != null)
-                tower.TowerSO = _towers[SelectedTower];
+                tower.TowerSO = Towers[SelectedTower];
         }
     }
 }

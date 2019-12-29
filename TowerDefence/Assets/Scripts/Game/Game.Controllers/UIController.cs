@@ -27,6 +27,8 @@ namespace Game.Controllers
         private Image _towersPanel = null;
         [SerializeField]
         private TextMeshProUGUI _goldText = null;
+        [SerializeField]
+        private GameObject _towerButtonPrefab = null;
 
         private TowerSpawner _towerSpawner;
         private PlayerStats _playerStats;
@@ -40,6 +42,7 @@ namespace Game.Controllers
             _playerStats.HealthChanged += UpdateHealthBar;
             _playerStats.GoldChanged += UpdateGold;
             _goldText.text = _playerStats.Gold.ToString();
+            SpawnTowerButtons();
         }
 
         /// <summary>
@@ -73,6 +76,23 @@ namespace Game.Controllers
             _damageBar.fillAmount = ((float)towerSO.Damage / (float)towerSO.MaxDamage);
             _speedBar.fillAmount = ((towerSO.MaxSpeed - (float)towerSO.ShotsPerSecond) / (float)towerSO.MaxSpeed);
             _rangeBar.fillAmount = ((float)towerSO.Range / (float)towerSO.MaxRange);
+        }
+
+        /// <summary>
+        /// Spawns buttons with tower images,
+        /// that are used to spawn concrete turrets
+        /// </summary>
+        private void SpawnTowerButtons()
+        {
+            foreach(var tower in _towerSpawner.Towers)
+            {
+                Sprite towerImage = tower.TowerImage;
+                int id = tower.Id;
+                GameObject towerBG = Instantiate(_towerButtonPrefab, _towersPanel.GetComponentInChildren<VerticalLayoutGroup>().transform); ;
+                GameObject towerBTN = towerBG.GetComponentInChildren<Button>().gameObject;
+                towerBTN.GetComponent<Image>().sprite = towerImage;
+                towerBTN.GetComponent<Button>().onClick.AddListener(() => SelectTower(id));
+            }
         }
     }
 }
