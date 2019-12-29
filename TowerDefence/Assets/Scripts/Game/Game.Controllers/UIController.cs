@@ -24,10 +24,14 @@ namespace Game.Controllers
         [SerializeField]
         private Image _rangeBar = null;
         [SerializeField]
+        private Image _towersPanel = null;
+        [SerializeField]
         private TextMeshProUGUI _goldText = null;
 
         private TowerSpawner _towerSpawner;
         private PlayerStats _playerStats;
+
+        public Image TowersPanel { get => _towersPanel; set => _towersPanel = value; }
 
         private void Start()
         {

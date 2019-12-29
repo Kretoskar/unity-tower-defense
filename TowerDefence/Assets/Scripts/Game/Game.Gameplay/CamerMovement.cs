@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.Gameplay
 {
@@ -30,11 +31,13 @@ namespace Game.Gameplay
         private float v;
         private float y;
 
+        private RectTransform _towersPanel;
         private LevelGenerator _levelGenerator;
 
         private void Start()
         {
             InjectDataFromScriptableObject();
+            _towersPanel = FindObjectOfType<UIController>().TowersPanel.rectTransform;
         }
 
         private void Update()
@@ -49,9 +52,13 @@ namespace Game.Gameplay
         /// </summary>
         private void GetInput()
         {
+            Vector2 mousePosition = Input.mousePosition;
+            if (!RectTransformUtility.RectangleContainsScreenPoint(_towersPanel, mousePosition))
+            {
+                y = Input.mouseScrollDelta.y;
+            }
             h = Input.GetAxis("Horizontal");
             v = Input.GetAxis("Vertical");
-            y = Input.mouseScrollDelta.y;
         }
 
         /// <summary>
