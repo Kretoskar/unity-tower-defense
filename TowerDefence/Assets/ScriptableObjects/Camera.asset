@@ -18,4 +18,4 @@ MonoBehaviour:
   _highClamp: 200
   _scrollLowClamp: 10
   _scrollHighClamp: 50
-  _maxRotation: 20
+  _maxRotation: 50

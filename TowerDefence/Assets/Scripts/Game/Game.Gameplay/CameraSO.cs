@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Game.Gameplay
 {
+    /// <summary>
+    /// Camera data
+    /// </summary>
     [CreateAssetMenu(menuName = "ScriptableObject/Camera", fileName = "Camera")]
     public class CameraSO : ScriptableObject
     {
