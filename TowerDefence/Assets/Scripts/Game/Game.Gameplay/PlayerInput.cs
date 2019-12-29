@@ -47,9 +47,12 @@ namespace Game.Gameplay
                     clickPosition = hit.point;
                 }
 
-                clickPosition.y = 1f;
-                clickPosition = _gridController.GetClosestGridPosition(clickPosition);
-                PlayerClicked?.Invoke(clickPosition);
+                if (hit.transform.gameObject.tag == "Ground")
+                {
+                    clickPosition.y = 1f;
+                    clickPosition = _gridController.GetClosestGridPosition(clickPosition);
+                    PlayerClicked?.Invoke(clickPosition);
+                }
             }
         }
     }

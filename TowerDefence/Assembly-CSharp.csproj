@@ -79,6 +79,8 @@
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Mobs\MobWaveSO.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Gameplay\PropsSpawner.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Gameplay\PropsSpawnerSO.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Towers\Tower.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Towers\TowerSO.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Towers\TowerSpawner.cs" />

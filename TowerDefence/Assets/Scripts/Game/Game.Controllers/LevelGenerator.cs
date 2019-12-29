@@ -196,6 +196,7 @@ namespace Game.Controllers
             Ground.transform.localScale = new Vector3(_levelWidth, _levelDepth,  _maxZ - _minZ + 5);    //shrink the ground according to the path coordinates
             Ground.transform.parent = _parent.transform;
             Ground.name = "Ground";
+            Ground.tag = "Ground";
         }
 
         /// <summary>
