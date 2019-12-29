@@ -35,13 +35,30 @@ namespace Game.Controllers
         private GameObject _parent;
         private GameObject _pathParent;
         private PathController _pathController;
+        private List<Vector3> _pathPositions;
 
         public GameObject Ground { get => _ground; set => _ground = value; }
+        public List<Vector3> PathPositions { get => _pathPositions; set => _pathPositions = value; }
+        /// <summary>
+        /// Corner positions, 
+        /// 0 - Lower left
+        /// 1 - Upper left 
+        /// 2 - Upper right
+        /// 3 - Lower right
+        /// </summary>
+        public List<Vector3> CornerPositions { get; set; }
+        public int LevelWidth { get => _levelWidth; set => _levelWidth = value; }
+        public int LevelHeight { get => _levelHeight; set => _levelHeight = value; }
+
+        public Action LevelGenerated;
 
         private void Start()
         {
+            CornerPositions = new List<Vector3>();
+
             InjectDataFromScriptableObject();
 
+            _pathPositions = new List<Vector3>();
             _pathController = FindObjectOfType<PathController>();
 
             SpawnParent();
@@ -73,7 +90,7 @@ namespace Game.Controllers
             //Spawn path entrance
             _pathParent = new GameObject("Path");
             _pathParent.transform.parent = _parent.transform;
-            _entrancePosition = new Vector3(1, _pathHeight, UnityEngine.Random.Range(1, _levelHeight));
+            _entrancePosition = new Vector3(1, _pathHeight, UnityEngine.Random.Range(1, LevelHeight));
             _minZ = _entrancePosition.z;
             _maxZ = _minZ;
             GameObject entrance = Instantiate(_pathTile, _entrancePosition, Quaternion.identity);
@@ -82,6 +99,7 @@ namespace Game.Controllers
             _currentX = 1;
             _currentZ = (int)_entrancePosition.z;
             _tileCount = 1;
+            _pathPositions.Add(_entrancePosition);
 
             //Add first waypoint
             _pathController.WayPoints.Add(new Vector3(_currentX, 1 + _entrancePosition.y, _currentZ));
@@ -173,7 +191,7 @@ namespace Game.Controllers
                     _minZ = _currentZ;
                 if (_currentZ > _maxZ)
                     _maxZ = _currentZ;
-            } while (_currentX < _levelWidth);
+            } while (_currentX < LevelWidth);
 
             //Add last waypoint
             _pathController.WayPoints.Add(new Vector3(_currentX, 1 + _entrancePosition.y, _currentZ));
@@ -189,14 +207,24 @@ namespace Game.Controllers
         private void SpawnGround()
         {
             Ground = Instantiate(_ground, new Vector3(0, 0), Quaternion.identity);
-            Ground.transform.position = new Vector3(
-                _levelWidth / 2 + 0.5f,     // + 0.5f so that the tiles have integer positions
+            Vector3 groundPos = new Vector3(
+                LevelWidth / 2 + 0.5f,     // + 0.5f so that the tiles have integer positions
                 (-1) * _levelDepth / 2,     // make the center according to the level depth
-                _minZ + (_maxZ - _minZ)/2); // set the ground position according to path coordinates
-            Ground.transform.localScale = new Vector3(_levelWidth, _levelDepth,  _maxZ - _minZ + 5);    //shrink the ground according to the path coordinates
+                _minZ + (_maxZ - _minZ) / 2); // set the ground position according to path coordinates
+            Ground.transform.position = groundPos;
+            _levelHeight = (int)(_maxZ - _minZ + 5);
+            Ground.transform.localScale = new Vector3(LevelWidth, _levelDepth,  _levelHeight);    //shrink the ground according to the path coordinates
             Ground.transform.parent = _parent.transform;
             Ground.name = "Ground";
             Ground.tag = "Ground";
+
+            //Add corners
+            CornerPositions.Add(new Vector3(1, 0, groundPos.z - _levelHeight /2 + 0.5f));
+            CornerPositions.Add(new Vector3(1, 0, groundPos.z + _levelHeight /2 - 0.5f));
+            CornerPositions.Add(new Vector3(_levelWidth, 0, groundPos.z + _levelHeight /2 - 0.5f));
+            CornerPositions.Add(new Vector3(_levelWidth, 0, groundPos.z - _levelHeight /2 + 0.5f));
+
+            LevelGenerated?.Invoke();
         }
 
         /// <summary>
@@ -209,6 +237,7 @@ namespace Game.Controllers
             tile.name = "Path tile: " + _tileCount;
             tile.transform.parent = _pathParent.transform;
             _tileCount++;
+            _pathPositions.Add(position);
         }
 
         /// <summary>
@@ -217,8 +246,8 @@ namespace Game.Controllers
         /// </summary>
         private void InjectDataFromScriptableObject()
         {
-            _levelWidth = _levelGeneratorSO.LevelWidth;
-            _levelHeight = _levelGeneratorSO.LevelHeight;
+            LevelWidth = _levelGeneratorSO.LevelWidth;
+            LevelHeight = _levelGeneratorSO.LevelHeight;
             _percentOfChanceForACurveToOccur = _levelGeneratorSO.CurveChance;
             _pathHeight = _levelGeneratorSO.PathHeight;
             _ground = _levelGeneratorSO.Ground;

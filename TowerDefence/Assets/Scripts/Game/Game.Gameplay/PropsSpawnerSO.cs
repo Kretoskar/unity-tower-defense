@@ -11,10 +11,13 @@ namespace Game.Gameplay
     public class PropsSpawnerSO : ScriptableObject
     {
         [SerializeField]
-        private List<GameObject> _props = null;
+        private List<Prop> _props = null;
 
         [SerializeField]
-        [Range(0, 10)]
-        private int _propsPerTenUnits = 3;
+        [Range(0, 100)]
+        private int _propOccurChance = 3;
+
+        public List<Prop> Props { get => _props; set => _props = value; }
+        public int PropOccurChance { get => _propOccurChance; set => _propOccurChance = value; }
     }
 }
