@@ -16,6 +16,7 @@ namespace Game.Gameplay
         private GridController _gridController;
 
         public Action<Vector3> PlayerClicked;
+        public Action<Prop> PlayerRightClicked;
 
         private void Start()
         {
@@ -52,6 +53,22 @@ namespace Game.Gameplay
                     clickPosition.y = 1f;
                     clickPosition = _gridController.GetClosestGridPosition(clickPosition);
                     PlayerClicked?.Invoke(clickPosition);
+                }
+            }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                if (EventSystem.current.IsPointerOverGameObject())
+                    return;
+
+                Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.transform.gameObject.tag == "Prop")
+                    {
+                        hit.transform.GetComponent<Prop>().Sell();
+                    }
                 }
             }
         }

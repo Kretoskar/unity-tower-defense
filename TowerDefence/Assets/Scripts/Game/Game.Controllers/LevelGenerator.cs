@@ -223,7 +223,6 @@ namespace Game.Controllers
             CornerPositions.Add(new Vector3(1, 0, groundPos.z + _levelHeight /2 - 0.5f));
             CornerPositions.Add(new Vector3(_levelWidth, 0, groundPos.z + _levelHeight /2 - 0.5f));
             CornerPositions.Add(new Vector3(_levelWidth, 0, groundPos.z - _levelHeight /2 + 0.5f));
-
             LevelGenerated?.Invoke();
         }
 
