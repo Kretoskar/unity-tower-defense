@@ -17,6 +17,7 @@ namespace Game.Controllers
         private int _startingGold;
         private int _maxHunger;
 
+        private float _timer;
         private int _currHealth;
         private int _currGold;
         private int _currHunger;
@@ -50,8 +51,11 @@ namespace Game.Controllers
             set
             {
                 _currHunger = value;
-                if (_currHunger < 0)
+                if (_currHunger <= 0)
+                {
                     _currHunger = 0;
+                    Die();
+                }
                 HungerChanged?.Invoke(_currHunger);
             }
         }
@@ -78,6 +82,17 @@ namespace Game.Controllers
             _currHealth = MaxHealth;
             _currGold = StartingGold;
             _currHunger = MaxHunger;
+            _timer = 0;
+        }
+
+        private void Update()
+        {
+            _timer += Time.deltaTime;
+            if(_timer >= 10)
+            {
+                Hunger -= _playerStatsSO.HungerDecreasePerSecond;
+                _timer = 0;
+            }
         }
 
         /// <summary>

@@ -16,6 +16,8 @@ namespace Game.Controllers
         [Header("Player UI")]
         [SerializeField]
         private Image _healthBar = null;
+        [SerializeField]
+        private Image _hungerBar = null;
 
         [Header("Tower UI")]
         [SerializeField]
@@ -59,10 +61,22 @@ namespace Game.Controllers
             _inventory = FindObjectOfType<Inventory>();
             _playerStats = FindObjectOfType<PlayerStats>();
             _towerSpawner = FindObjectOfType<TowerSpawner>();
+
             _playerStats.HealthChanged += UpdateHealthBar;
             _playerStats.GoldChanged += UpdateGold;
+            _playerStats.HungerChanged += UpdateHunger;
+
             _goldText.text = _playerStats.Gold.ToString();
             SpawnTowerButtons();
+        }
+
+        /// <summary>
+        /// Update player hunger UI
+        /// </summary>
+        public void UpdateHunger(int currHunger)
+        {
+            int maxHunger = _playerStats.MaxHealth;
+            _hungerBar.fillAmount = ((float)currHunger / (float)maxHunger);
         }
 
         /// <summary>

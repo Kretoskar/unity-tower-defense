@@ -485,6 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 904936235}
+  _hungerBar: {fileID: 1378100272}
   _turretAvatar: {fileID: 379542662}
   _damageBar: {fileID: 1341948356}
   _speedBar: {fileID: 96716843}
@@ -1066,6 +1067,18 @@ CanvasRenderer:
 --- !u!114 &1341948356 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 759163951, guid: 03fa7455268b2fc438628a74d45f0f0c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1709532334804838604}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1378100272 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 751693470, guid: 03fa7455268b2fc438628a74d45f0f0c,
     type: 3}
   m_PrefabInstance: {fileID: 1709532334804838604}
   m_PrefabAsset: {fileID: 0}

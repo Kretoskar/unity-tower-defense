@@ -17,3 +17,4 @@ MonoBehaviour:
   _startingGold: 100
   _maxHealth: 100
   _maxHunger: 100
+  _hungerDecreasePerTenSeconds: 50
