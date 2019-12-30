@@ -16,16 +16,20 @@ namespace Game.Gameplay
 
         private LevelGenerator _levelGenerator = null;
 
+        //Injected from scriptable object
         private int _propOccurChance;
+        private List<Prop> _props;
+
         private int _levelWidht = 0;
         private int _levelHeight = 0;
-        private List<Prop> _props;
+        private GameObject _parent;
 
         public int LevelWidht { get => _levelWidht; set => _levelWidht = value; }
         public int LevelHeight { get => _levelHeight; set => _levelHeight = value; }
 
         private void Start()
         {
+            _parent = new GameObject("Props");
             _levelGenerator = FindObjectOfType<LevelGenerator>();
             _levelGenerator.LevelGenerated += SpawnProps;
             InjectDataFromScriptableObject();
@@ -54,6 +58,7 @@ namespace Game.Gameplay
                         int whichProp = UnityEngine.Random.Range(0, _props.Count);
                         GameObject prop = Instantiate(_props[whichProp].gameObject, new Vector3(i, 0, j), Quaternion.identity);
                         prop.name = "Prop";
+                        prop.transform.parent = _parent.transform;
                     }
                 }
             }

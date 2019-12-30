@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Game.Gameplay.Towers;
-
+using Game.Gameplay.Items;
 
 namespace Game.Controllers
 {
@@ -13,8 +13,11 @@ namespace Game.Controllers
     /// </summary>
     public class UIController : MonoBehaviour
     {
+        [Header("Player UI")]
         [SerializeField]
         private Image _healthBar = null;
+
+        [Header("Tower UI")]
         [SerializeField]
         private Image _turretAvatar = null;
         [SerializeField]
@@ -26,17 +29,34 @@ namespace Game.Controllers
         [SerializeField]
         private Image _towersPanel = null;
         [SerializeField]
-        private TextMeshProUGUI _goldText = null;
-        [SerializeField]
         private GameObject _towerButtonPrefab = null;
+
+        [Header("Item UI")]
+        [SerializeField]
+        private Image _itemsPanel = null;
+        [SerializeField]
+        private Image _choosenItemImage = null;
+        [SerializeField]
+        private Text _choosenItemName = null;
+        [SerializeField]
+        private Text _choosenItemDesc = null;
+        [SerializeField]
+        private GameObject _itemButtonPrefab = null;
+
+        [Header("Gold UI")]
+        [SerializeField]
+        private TextMeshProUGUI _goldText = null;
+
 
         private TowerSpawner _towerSpawner;
         private PlayerStats _playerStats;
+        private Inventory _inventory;
 
         public Image TowersPanel { get => _towersPanel; set => _towersPanel = value; }
 
         private void Start()
         {
+            _inventory = FindObjectOfType<Inventory>();
             _playerStats = FindObjectOfType<PlayerStats>();
             _towerSpawner = FindObjectOfType<TowerSpawner>();
             _playerStats.HealthChanged += UpdateHealthBar;
@@ -76,6 +96,31 @@ namespace Game.Controllers
             _damageBar.fillAmount = ((float)towerSO.Damage / (float)towerSO.MaxDamage);
             _speedBar.fillAmount = ((towerSO.MaxSpeed - (float)towerSO.ShotsPerSecond) / (float)towerSO.MaxSpeed);
             _rangeBar.fillAmount = ((float)towerSO.Range / (float)towerSO.MaxRange);
+        }
+
+        /// <summary>
+        /// Choose a item to select and update it's UI
+        /// </summary>
+        public void SelectItem(int index)
+        {
+            _inventory.SelectedItemID = index;
+            print(index);
+            IItem selectedItem = _inventory.SelectedItem;
+            _choosenItemImage.sprite = selectedItem.Image;
+            _choosenItemName.text = selectedItem.Name;
+            _choosenItemDesc.text = selectedItem.Desc;
+        }
+
+        /// <summary>
+        /// Add item to item panel
+        /// </summary>
+        /// <param name="item">what item to add</param>
+        public void AddItem(IItem item)
+        {
+            GameObject itemBG = Instantiate(_itemButtonPrefab, _itemsPanel.GetComponentInChildren<VerticalLayoutGroup>().transform);
+            GameObject itemBTN = itemBG.GetComponentInChildren<Button>().gameObject;
+            itemBTN.GetComponent<Image>().sprite = item.Image;
+            itemBTN.GetComponent<Button>().onClick.AddListener(() => SelectItem(item.Id));
         }
 
         /// <summary>

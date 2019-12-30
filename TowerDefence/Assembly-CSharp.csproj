@@ -72,6 +72,10 @@
     <Compile Include="Assets\Scripts\Game\Game.Controllers\UIController.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\CameraSO.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\CamerMovement.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Gameplay\Items\Axe.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Gameplay\Items\IItem.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Gameplay\Items\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Gameplay\Items\ItemSO.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Mobs\Mob.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Mobs\MobSO.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Mobs\MobSpawner.cs" />

@@ -4,6 +4,7 @@ using UnityEngine;
 using Game.Controllers;
 using System;
 using UnityEngine.EventSystems;
+using Game.Gameplay.Items;
 
 namespace Game.Gameplay
 {
@@ -14,6 +15,7 @@ namespace Game.Gameplay
     {
         private Camera _mainCamera;
         private GridController _gridController;
+        private Inventory _inventory;
 
         public Action<Vector3> PlayerClicked;
         public Action<Prop> PlayerRightClicked;
@@ -21,6 +23,7 @@ namespace Game.Gameplay
         private void Start()
         {
             _gridController = FindObjectOfType<GridController>();
+            _inventory = FindObjectOfType<Inventory>();
             _mainCamera = Camera.main;
         }
 
@@ -60,15 +63,25 @@ namespace Game.Gameplay
                 if (EventSystem.current.IsPointerOverGameObject())
                     return;
 
+                Vector3 clickPosition = new Vector3();
+                GameObject clickedObject;
+
                 Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if (hit.transform.gameObject.tag == "Prop")
+                    clickPosition = hit.point;
+                    clickPosition.y = 1f;
+                    clickPosition = _gridController.GetClosestGridPosition(clickPosition);
+                    clickedObject = hit.transform.gameObject;
+                    if(_inventory.SelectedItem != null)
                     {
-                        hit.transform.GetComponent<Prop>().Sell();
+                        _inventory.SelectedItem.ClickedObject = clickedObject;
+                        _inventory.SelectedItem.ClickedPosition = clickPosition;
+                        _inventory.SelectedItem.Use();
                     }
+
                 }
             }
         }
