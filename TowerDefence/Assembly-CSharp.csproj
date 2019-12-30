@@ -74,6 +74,8 @@
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\CamerMovement.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Items\ConcreteItems\Apple.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Items\ConcreteItems\Axe.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Gameplay\Items\ConcreteItems\BagOfGold.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Gameplay\Items\ConcreteItems\HealthPotion.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Items\IItem.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Items\Inventory.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Items\ItemSO.cs" />

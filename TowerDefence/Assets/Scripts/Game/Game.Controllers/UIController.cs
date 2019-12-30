@@ -154,11 +154,16 @@ namespace Game.Controllers
                     item = itemInt;
             }
             string itemName = item.Name;
+            GameObject itemWindowGO = null;
             foreach(var itemWindow in _itemWindows)
             {
                 if (itemWindow.name == item.Name)
+                {
+                    itemWindowGO = itemWindow;
                     Destroy(itemWindow);
+                }
             }
+            _itemWindows.Remove(itemWindowGO);
             _choosenItemImage.sprite = _UIMask;
             _choosenItemName.text = "";
             _choosenItemDesc.text = "";

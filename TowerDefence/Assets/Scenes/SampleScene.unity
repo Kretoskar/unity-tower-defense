@@ -1209,6 +1209,8 @@ MonoBehaviour:
   _allItems:
   - {fileID: 8523233675829188907, guid: 308ce0e78cb6cfe49ba6d2d9609ae313, type: 3}
   - {fileID: 8523233675829188907, guid: 19ff11e2637299642969bd3335535169, type: 3}
+  - {fileID: 8523233675829188907, guid: 748c830f5f51cc443bd563e7b2a7282a, type: 3}
+  - {fileID: 8523233675829188907, guid: d3d1d0439099466438ca5d6182e6b224, type: 3}
 --- !u!4 &1508143462
 Transform:
   m_ObjectHideFlags: 0
