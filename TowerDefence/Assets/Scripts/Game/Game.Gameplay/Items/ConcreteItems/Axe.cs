@@ -10,12 +10,6 @@ namespace Game.Gameplay.Items
         [SerializeField]
         private ItemSO _itemSO = null;
 
-        //Injected from scriptable object
-        private Sprite _image;
-        private string _name;
-        private string _desc;
-        private int _id;
-
         public Sprite Image { get => _itemSO.Image; }
         public int Id => _itemSO.Id;
         public string Name => _itemSO.name;

@@ -17,6 +17,7 @@ namespace Game.Gameplay.Items
         private string _name;
 
         [SerializeField]
+        [TextArea(3,10)]
         private string _desc;
 
         public Sprite Image { get => _image; set => _image = value; }

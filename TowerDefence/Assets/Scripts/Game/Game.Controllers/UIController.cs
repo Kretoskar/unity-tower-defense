@@ -39,6 +39,8 @@ namespace Game.Controllers
         [SerializeField]
         private Image _choosenItemImage = null;
         [SerializeField]
+        private Sprite _UIMask = null;
+        [SerializeField]
         private Text _choosenItemName = null;
         [SerializeField]
         private Text _choosenItemDesc = null;
@@ -53,6 +55,7 @@ namespace Game.Controllers
         private TowerSpawner _towerSpawner;
         private PlayerStats _playerStats;
         private Inventory _inventory;
+        private List<GameObject> _itemWindows = new List<GameObject>();
 
         public Image TowersPanel { get => _towersPanel; set => _towersPanel = value; }
 
@@ -118,7 +121,6 @@ namespace Game.Controllers
         public void SelectItem(int index)
         {
             _inventory.SelectedItemID = index;
-            print(index);
             IItem selectedItem = _inventory.SelectedItem;
             _choosenItemImage.sprite = selectedItem.Image;
             _choosenItemName.text = selectedItem.Name;
@@ -133,8 +135,33 @@ namespace Game.Controllers
         {
             GameObject itemBG = Instantiate(_itemButtonPrefab, _itemsPanel.GetComponentInChildren<VerticalLayoutGroup>().transform);
             GameObject itemBTN = itemBG.GetComponentInChildren<Button>().gameObject;
+            itemBG.name = item.Name;
             itemBTN.GetComponent<Image>().sprite = item.Image;
             itemBTN.GetComponent<Button>().onClick.AddListener(() => SelectItem(item.Id));
+            _itemWindows.Add(itemBG);
+        }
+
+        /// <summary>
+        /// Remove item from the panel
+        /// </summary>
+        public void RemoveItem(int id)
+        {
+            IItem item = null;
+            foreach(var itemObj in _inventory.AllItems)
+            {
+                var itemInt = itemObj.GetComponent<IItem>();
+                if (itemInt.Id == id)
+                    item = itemInt;
+            }
+            string itemName = item.Name;
+            foreach(var itemWindow in _itemWindows)
+            {
+                if (itemWindow.name == item.Name)
+                    Destroy(itemWindow);
+            }
+            _choosenItemImage.sprite = _UIMask;
+            _choosenItemName.text = "";
+            _choosenItemDesc.text = "";
         }
 
         /// <summary>

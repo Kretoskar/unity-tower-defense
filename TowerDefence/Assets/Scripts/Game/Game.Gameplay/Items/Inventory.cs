@@ -29,11 +29,22 @@ namespace Game.Gameplay.Items
             }
         }
         public int SelectedItemID { get => _selectedItemID; set => _selectedItemID = value; }
+        public List<GameObject> AllItems { get => _allItems; set => _allItems = value; }
 
         private void Start()
         {
-            _itemsInInventory.Add(_allItems[0].GetComponent<IItem>());
-            FindObjectOfType<UIController>().AddItem(_itemsInInventory[0]);
+            foreach (var item in AllItems)
+            {
+                _itemsInInventory.Add(item.GetComponent<IItem>());
+                FindObjectOfType<UIController>().AddItem(item.GetComponent<IItem>());
+            }
+        }
+
+        public void RemoveItem(int itemID)
+        {
+            _itemsInInventory.RemoveAll(x => x.Id == itemID);
+            SelectedItemID = -1;
+            FindObjectOfType<UIController>().RemoveItem(itemID);
         }
     }
 }

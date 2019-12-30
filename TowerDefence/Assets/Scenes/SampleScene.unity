@@ -495,6 +495,7 @@ MonoBehaviour:
     type: 3}
   _itemsPanel: {fileID: 529148487}
   _choosenItemImage: {fileID: 1920113764}
+  _UIMask: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   _choosenItemName: {fileID: 211270900}
   _choosenItemDesc: {fileID: 1117193113}
   _itemButtonPrefab: {fileID: 6350115381790902872, guid: 43f8a3bd0b484b545af4de9f7ae52da6,
@@ -1207,6 +1208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _allItems:
   - {fileID: 8523233675829188907, guid: 308ce0e78cb6cfe49ba6d2d9609ae313, type: 3}
+  - {fileID: 8523233675829188907, guid: 19ff11e2637299642969bd3335535169, type: 3}
 --- !u!4 &1508143462
 Transform:
   m_ObjectHideFlags: 0
