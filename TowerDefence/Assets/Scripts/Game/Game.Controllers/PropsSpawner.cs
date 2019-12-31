@@ -1,10 +1,11 @@
 ﻿using Game.Controllers;
+using Game.Gameplay;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Gameplay
+namespace Game.Controllers
 {
     /// <summary>
     /// Spawns static level props

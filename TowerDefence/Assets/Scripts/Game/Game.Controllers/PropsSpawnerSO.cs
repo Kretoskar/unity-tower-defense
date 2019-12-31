@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using Game.Gameplay;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Gameplay
+namespace Game.Controllers
 {
     /// <summary>
     /// Props spawner data

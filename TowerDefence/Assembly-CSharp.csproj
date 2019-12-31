@@ -69,7 +69,9 @@
     <Compile Include="Assets\Scripts\Game\Game.Controllers\PathController.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Controllers\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Controllers\PlayerStatsSO.cs" />
-    <Compile Include="Assets\Scripts\Game\Game.Controllers\UIController.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Controllers\PropsSpawner.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Controllers\PropsSpawnerSO.cs" />
+    <Compile Include="Assets\Scripts\Game\Game.Controllers\UI\UIController.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\CameraSO.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\CamerMovement.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Items\ConcreteItems\Apple.cs" />
@@ -87,8 +89,6 @@
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Projectile.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Prop.cs" />
-    <Compile Include="Assets\Scripts\Game\Game.Gameplay\PropsSpawner.cs" />
-    <Compile Include="Assets\Scripts\Game\Game.Gameplay\PropsSpawnerSO.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Towers\Tower.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Towers\TowerSO.cs" />
     <Compile Include="Assets\Scripts\Game\Game.Gameplay\Towers\TowerSpawner.cs" />

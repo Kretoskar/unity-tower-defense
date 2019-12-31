@@ -6,7 +6,7 @@ using TMPro;
 using Game.Gameplay.Towers;
 using Game.Gameplay.Items;
 
-namespace Game.Controllers
+namespace Game.Controllers.UI
 {
     /// <summary>
     /// Contains methods for the UI behavioru
