@@ -38,7 +38,7 @@ namespace Game.Gameplay
         private void Start()
         {
             InjectDataFromScriptableObject();
-            _towersPanel = FindObjectOfType<UIController>().TowersPanel.rectTransform;
+            _towersPanel = FindObjectOfType<GameUIController>().TowersPanel.rectTransform;
         }
 
         private void Update()

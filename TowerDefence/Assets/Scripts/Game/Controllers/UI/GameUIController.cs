@@ -11,7 +11,7 @@ namespace Game.Controllers.UI
     /// <summary>
     /// Contains methods for the UI behavioru
     /// </summary>
-    public class UIController : MonoBehaviour
+    public class GameUIController : MonoBehaviour
     {
         [Header("Player UI")]
         [SerializeField]
