@@ -161,6 +161,7 @@ namespace Game.Controllers.UI
                 {
                     itemWindowGO = itemWindow;
                     Destroy(itemWindow);
+                    break;
                 }
             }
             _itemWindows.Remove(itemWindowGO);
