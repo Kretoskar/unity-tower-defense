@@ -37,7 +37,7 @@ namespace Game.Gameplay.Items
             foreach (var item in AllItems)
             {
                 _itemsInInventory.Add(item.GetComponent<IItem>());
-                FindObjectOfType<UIController>().AddItem(item.GetComponent<IItem>());
+                FindObjectOfType<GameUIController>().AddItem(item.GetComponent<IItem>());
             }
         }
 
@@ -45,7 +45,7 @@ namespace Game.Gameplay.Items
         {
             _itemsInInventory.RemoveAll(x => x.Id == itemID);
             SelectedItemID = -1;
-            FindObjectOfType<UIController>().RemoveItem(itemID);
+            FindObjectOfType<GameUIController>().RemoveItem(itemID);
         }
     }
 }
