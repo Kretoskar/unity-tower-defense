@@ -71,6 +71,7 @@ namespace Game.Gameplay.Mobs
                     return;
                 }
             }
+            transform.LookAt(_pathController.WayPoints[_currentWaypointIndex]);
             transform.position = Vector3.MoveTowards(transform.position, _pathController.WayPoints[_currentWaypointIndex], _mobSO.Speed * Time.deltaTime);
         }
 

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a005c8ba8e13b30429c7b17b9cd93bd3, type: 3}
-  m_Name: SampleMob
+  m_Name: GhostMob
   m_EditorClassIdentifier: 
-  _speed: 5
-  _health: 100
+  _speed: 3
+  _health: 500
   _damageDealtToPlayerOnPathExit: 10
-  _goldAddedToPlayerOnDeath: 10
+  _goldAddedToPlayerOnDeath: 50
   _scoreAddedToPlayerOnDeath: 10
-  _prefab: {fileID: 1438554359880693944, guid: 175d0aa4b47ca3f46a1d4d783e148ab5, type: 3}
+  _prefab: {fileID: 6842424883226622767, guid: cd2346255561dab4eaeacb6771335eba, type: 3}

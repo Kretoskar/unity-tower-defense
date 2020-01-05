@@ -15,4 +15,5 @@ MonoBehaviour:
   _mobWaves:
   - {fileID: 11400000, guid: 6f7db2d25dea45b47b953d9916e2d402, type: 2}
   - {fileID: 11400000, guid: 83d41248e847e704081c17b085a2b5d6, type: 2}
-  _timeBetweenWaveSpawns: 3
+  - {fileID: 11400000, guid: c046b1fc27c76bb479f09557a5202418, type: 2}
+  _timeBetweenWaveSpawns: 2
